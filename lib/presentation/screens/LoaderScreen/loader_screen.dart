@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/login_screen.dart';
 import 'package:job_match_app/presentation/screens/HomeViews/home_view_user.dart';
 import 'package:video_player/video_player.dart';
@@ -9,10 +10,10 @@ class ScreenLoader extends StatefulWidget {
   final bool userData;
   const ScreenLoader({super.key, required this.userData});
   @override
-  _ScreenLoader createState() => _ScreenLoader();
+  _ScreenLoaderState createState() => _ScreenLoaderState();
 }
 
-class _ScreenLoader extends State<ScreenLoader> {
+class _ScreenLoaderState extends State<ScreenLoader> {
   late VideoPlayerController _controller;
 
   @override
@@ -21,24 +22,18 @@ class _ScreenLoader extends State<ScreenLoader> {
 
     _controller = VideoPlayerController.asset('assets/video/JobMatchSplash.mp4')
       ..initialize().then((_) {
-        _controller.setPlaybackSpeed(0.50);
+        _controller.setPlaybackSpeed(0.70);
+        _controller.setLooping(false);
         _controller.play();
         setState(() {});
       });
 
     // Iniciar el temporizador para cambiar de pantalla después de 2 segundos
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(milliseconds: 3400), () {
       if (widget.userData != true) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()),
-        );
+        context.go('/login');
       } else {
-        // Redireccionar a la pantalla del usuario si está autenticado
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const ScreenUser()),
-        );
+        context.go('/user_home');
       }
     });
   }

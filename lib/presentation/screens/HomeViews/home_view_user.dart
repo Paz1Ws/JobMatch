@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../widgets/LoginWidgets/LoginScreens.dart';
 import '../RegisterScreens/RegisterScreens.dart';
 
-class ScreenUser extends StatefulWidget {
-  const ScreenUser({super.key});
+class UserScreen extends StatefulWidget {
+  const UserScreen({super.key});
 
   @override
-  _ScreenUserState createState() => _ScreenUserState();
+  _UserScreenState createState() => _UserScreenState();
 }
 
-class _ScreenUserState extends State<ScreenUser> {
+class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,11 +29,7 @@ class _ScreenUserState extends State<ScreenUser> {
                     MyButtons(
                       onTap: () async {
                         await FirebaseServices().googleSignOut();
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => const LoginScreen(),
-                          ),
-                        );
+                        context.go('/login');
                       },
                       text: "Log Out",
                     ),

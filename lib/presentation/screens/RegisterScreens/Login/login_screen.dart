@@ -1,4 +1,9 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/Google/login_with_google.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/WithRuc/login_ruc.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/SignUp/sign_up_screen.dart';
@@ -8,6 +13,7 @@ import 'package:job_match_app/presentation/screens/HomeViews/home_view_user.dart
 import 'package:job_match_app/presentation/widgets/LoginWidgets/login_button.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/snackbar.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/text_field_input.dart';
+import 'package:job_match_app/presentation/widgets/ProfileInformation/curved_painter.dart';
 
 import '../../../../infrastructure/services/authentication.dart';
 
@@ -41,11 +47,7 @@ class _SignupScreenState extends State<LoginScreen> {
       setState(() {
         isLoading = false;
       });
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const ScreenUser(),
-        ),
-      );
+      context.go('/home');
     } else {
       setState(() {
         isLoading = false;
@@ -61,126 +63,151 @@ class _SignupScreenState extends State<LoginScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: SizedBox(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: height / 2.7,
-                child: Image.asset(
-                  'assets/images/LoginImage.png',
-                  fit: BoxFit.contain,
+        child: Stack(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.5,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  end: Alignment(0.0, 0.4),
+                  begin: Alignment(0.0, -1),
+                  colors: <Color>[
+                    Colors.pink,
+                    Colors.deepOrange,
+                  ],
                 ),
               ),
-              TextFieldInput(
-                icon: Icons.person,
-                textEditingController: emailController,
-                hintText: 'Enter your email',
-                textInputType: TextInputType.text,
+            ),
+            CustomPaint(
+              size: Size(
+                MediaQuery.of(context).size.width,
+                MediaQuery.of(context).size.height * 0.5,
               ),
-              TextFieldInput(
-                icon: Icons.lock,
-                textEditingController: passwordController,
-                hintText: 'Enter your password',
-                textInputType: TextInputType.text,
-                isPass: true,
+              painter: CurvedPainter(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 30),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.4,
+                child: Image.asset(
+                  'assets/images/JobMatch.png',
+                ),
               ),
-              const ForgotPassword(),
-              MyButtons(onTap: loginUser, text: "Log In"),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(height: 1, color: Colors.black26),
+            ),
+            Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: MediaQuery.sizeOf(context).height * 0.35,
+                    bottom: 0.0,
+                    left: 20.0,
+                    right: 20.0,
                   ),
-                  const Text("  or  "),
-                  Expanded(
-                    child: Container(height: 1, color: Colors.black26),
-                  ),
-                ],
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blueGrey),
-                  onPressed: () async {
-                    await FirebaseServices()
-                        .signInWithGoogle(); // Instantiate an object of the FirebaseServices class
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ScreenUser(),
-                      ),
-                    );
-                  },
-                  child: Row(
+                  child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Image.network(
-                          "https://ouch-cdn2.icons8.com/VGHyfDgzIiyEwg3RIll1nYupfj653vnEPRLr0AeoJ8g/rs:fit:456:456/czM6Ly9pY29uczgu/b3VjaC1wcm9kLmFz/c2V0cy9wbmcvODg2/LzRjNzU2YThjLTQx/MjgtNGZlZS04MDNl/LTAwMTM0YzEwOTMy/Ny5wbmc.png",
-                          height: 35,
+                      TextFieldInput(
+                        icon: Icons.person,
+                        textEditingController: emailController,
+                        hintText: 'Enter your email',
+                        textInputType: TextInputType.text,
+                      ),
+                      TextFieldInput(
+                        icon: Icons.lock,
+                        textEditingController: passwordController,
+                        hintText: 'Enter your password',
+                        textInputType: TextInputType.text,
+                        isPass: true,
+                      ),
+                      const ForgotPassword(),
+                      MyButtons(onTap: loginUser, text: "Log In"),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Container(height: 1, color: Colors.black26),
+                          ),
+                          const Text("  or  "),
+                          Expanded(
+                            child: Container(height: 1, color: Colors.black26),
+                          ),
+                        ],
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 247, 175, 67),
+                        ),
+                        onPressed: () async {
+                          await FirebaseServices().signInWithGoogle();
+                          context.go('/user_home');
+                        },
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 22),
+                              child: Image.network(
+                                "https://static-00.iconduck.com/assets.00/google-icon-512x512-tqc9el3r.png",
+                                height: 35,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            const Text(
+                              "Continue with Google",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      const Text(
-                        "Continue with Google",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.white,
+                      const SizedBox(height: 25),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Don't have an account? "),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const SignupScreen(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              "SignUp",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(horizontal: 50),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const RucLoginScreen(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          "For entreprises",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10, left: 100),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Don't have an account? "),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const SignupScreen(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        "SignUp",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  surfaceTintColor: const Color.fromARGB(255, 255, 151, 151),
-                  backgroundColor: const Color.fromARGB(255, 247, 175, 67),
-                  padding: const EdgeInsets.symmetric(horizontal: 50),
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const RucLoginScreen()),
-                  );
-                },
-                child: const Text(
-                  "For entreprises",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
       ),
     );
