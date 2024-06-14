@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:job_match_app/presentation/screens/Redirect/Jc_welcome.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/login_screen.dart';
 import 'package:job_match_app/presentation/screens/HomeViews/home_view_user.dart';
 import 'package:video_player/video_player.dart';
@@ -29,9 +30,9 @@ class _ScreenLoaderState extends State<ScreenLoader> {
       });
 
     // Iniciar el temporizador para cambiar de pantalla después de 2 segundos
-    Timer(const Duration(milliseconds: 3400), () {
+    Timer(const Duration(milliseconds: 3300), () {
       if (widget.userData != true) {
-        context.go('/login');
+        JcWelcomeScreen();
       } else {
         context.go('/user_home');
       }

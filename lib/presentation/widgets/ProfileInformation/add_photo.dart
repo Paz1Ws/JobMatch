@@ -1,17 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AddPhotoScreen extends StatefulWidget {
-  const AddPhotoScreen({super.key});
+class PhotosSection extends StatefulWidget {
+  const PhotosSection({super.key});
 
   @override
-  State<AddPhotoScreen> createState() => _AddPhotoScreenState();
+  State<PhotosSection> createState() => _PhotosSectionState();
 }
 
-class _AddPhotoScreenState extends State<AddPhotoScreen> {
+class _PhotosSectionState extends State<PhotosSection> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Agrega una foto de perfil'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              '¡Agrega una foto de perfil!',
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {},
+              child: const Text('Agregar foto'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

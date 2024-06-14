@@ -8,7 +8,6 @@ import 'package:job_match_app/presentation/screens/RegisterScreens/Login/Google/
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/WithRuc/login_ruc.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/SignUp/sign_up_screen.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/ForgotPassword/forgot_password.dart';
-import 'package:job_match_app/presentation/screens/HomeViews/home_view_user.dart';
 
 import 'package:job_match_app/presentation/widgets/LoginWidgets/login_button.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/snackbar.dart';

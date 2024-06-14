@@ -29,7 +29,7 @@ class _CompanyScreenState extends State<CompanyScreen> {
                     MyButtons(
                       onTap: () async {
                         await FirebaseServices().googleSignOut();
-                        context.go('/login');
+                        context.go('/userlogin');
                       },
                       text: "Log Out",
                     ),
