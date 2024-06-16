@@ -20,9 +20,15 @@ class OptionsContainer extends StatefulWidget {
 }
 
 class _OptionsContainerState extends State<OptionsContainer> {
-  final List<String> _languages = ["Español", "Inglés", "Francés"];
+  final List<String> _languages = [
+    "Spanish",
+    "English",
+    "Portuguese",
+    "French",
+    "Japanese"
+  ];
 
-  String _selectedLanguage = "Español";
+  String _selectedLanguage = "Spanish";
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +50,11 @@ class _OptionsContainerState extends State<OptionsContainer> {
                     fit: BoxFit.scaleDown,
                     child: Text(
                       _selectedLanguage,
-                      style: const TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.black
+                              : Colors.white,
+                          fontSize: 16),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -59,7 +69,10 @@ class _OptionsContainerState extends State<OptionsContainer> {
                 height: MediaQuery.of(context).size.height / 5,
                 child: CupertinoPicker(
                   squeeze: 1.5,
-                  backgroundColor: Colors.white,
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.dark
+                          ? Colors.black
+                          : Colors.white,
                   itemExtent: 26,
                   onSelectedItemChanged: (index) {
                     setState(() {

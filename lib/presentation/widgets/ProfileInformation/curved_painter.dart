@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CurvedPainter extends CustomPainter {
+  final Color color;
+  const CurvedPainter({required this.color});
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = Colors.white
+      ..color = color
       ..strokeWidth = 15;
 
     var path = Path();

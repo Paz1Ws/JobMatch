@@ -14,7 +14,8 @@ final candidateCollectionProvider = Provider((ref) {
 
 final nameControllerProvider = Provider((ref) => TextEditingController());
 
-final emailControllerProvider = Provider((ref) => TextEditingController());
+final phoneNumberControllerProvider =
+    Provider((ref) => TextEditingController());
 
 final professionControllerProvider = Provider((ref) => TextEditingController());
 final levelOfEducationControllerProvider =
@@ -29,27 +30,28 @@ final studyCenterControllerProvider =
 final skillsControllerProvider = Provider((ref) => TextEditingController());
 
 var selectedLanguageProvider = Provider((ref) => '');
+var isButtonEnabledProvider = Provider((ref) => false);
 
 class SignUpFormVariables {
   final GlobalKey<FormState> formKey;
   final FirebaseFirestore firestore;
   final CollectionReference candidateCollection;
   final TextEditingController nameController;
-  final TextEditingController emailController;
   final TextEditingController professionController;
   final TextEditingController studyCenterController;
   final TextEditingController skillsController;
   final TextEditingController levelOfEducationController;
   final TextEditingController lastJobController;
   final TextEditingController placeOfResidenceController;
+  final TextEditingController phoneNumberController;
   String selectedLanguage;
 
   SignUpFormVariables({
+    required this.phoneNumberController,
     required this.formKey,
     required this.firestore,
     required this.candidateCollection,
     required this.nameController,
-    required this.emailController,
     required this.professionController,
     required this.studyCenterController,
     required this.skillsController,
@@ -65,7 +67,7 @@ final signUpFormVariablesProvider = Provider((ref) {
   final firestore = ref.watch(firestoreProvider);
   final candidateCollection = ref.watch(candidateCollectionProvider);
   final nameController = ref.watch(nameControllerProvider);
-  final emailController = ref.watch(emailControllerProvider);
+  final phoneNumberController = ref.watch(phoneNumberControllerProvider);
   final professionController = ref.watch(professionControllerProvider);
   final studyCenterController = ref.watch(studyCenterControllerProvider);
   final skillsController = ref.watch(skillsControllerProvider);
@@ -77,11 +79,11 @@ final signUpFormVariablesProvider = Provider((ref) {
       ref.watch(levelOfEducationControllerProvider);
 
   return SignUpFormVariables(
+    phoneNumberController: phoneNumberController,
     formKey: formKey,
     firestore: firestore,
     candidateCollection: candidateCollection,
     nameController: nameController,
-    emailController: emailController,
     professionController: professionController,
     studyCenterController: studyCenterController,
     skillsController: skillsController,

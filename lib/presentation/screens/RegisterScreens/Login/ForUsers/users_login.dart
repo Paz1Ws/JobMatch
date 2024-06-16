@@ -1,20 +1,15 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/Google/login_with_google.dart';
-import 'package:job_match_app/presentation/screens/RegisterScreens/Login/WithRuc/login_ruc.dart';
+import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForEnterprises/enterprises_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/SignUp/sign_up_screen.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/ForgotPassword/forgot_password.dart';
-
 import 'package:job_match_app/presentation/widgets/LoginWidgets/login_button.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/snackbar.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/text_field_input.dart';
 import 'package:job_match_app/presentation/widgets/ProfileInformation/curved_painter.dart';
-
-import '../../../../infrastructure/services/authentication.dart';
+import 'package:job_match_app/presentation/widgets/theme_button.dart';
+import '../../../../../infrastructure/services/authentication.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -46,7 +41,7 @@ class _SignupScreenState extends State<LoginScreen> {
       setState(() {
         isLoading = false;
       });
-      context.go('/home');
+      context.go('/user_home');
     } else {
       setState(() {
         isLoading = false;
@@ -57,10 +52,11 @@ class _SignupScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? const Color.fromARGB(255, 28, 27, 27)
+          : Colors.white,
       body: SafeArea(
         child: Stack(
           children: [
@@ -79,18 +75,27 @@ class _SignupScreenState extends State<LoginScreen> {
               ),
             ),
             CustomPaint(
-              size: Size(
-                MediaQuery.of(context).size.width,
-                MediaQuery.of(context).size.height * 0.5,
-              ),
-              painter: CurvedPainter(),
+                size: Size(
+                  MediaQuery.of(context).size.width,
+                  MediaQuery.of(context).size.height * 0.5,
+                ),
+                painter: CurvedPainter(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? const Color.fromARGB(255, 28, 27, 27)
+                      : Colors.white,
+                )),
+            const Positioned(
+              top: 0,
+              right: 0,
+              child: ThemeButton(),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.4,
+              padding: const EdgeInsets.only(bottom: 500),
+              child: Center(
                 child: Image.asset(
                   'assets/images/JobMatch.png',
+                  height: MediaQuery.sizeOf(context).height * 1.2,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -120,7 +125,6 @@ class _SignupScreenState extends State<LoginScreen> {
                       ),
                       const ForgotPassword(),
                       MyButtons(onTap: loginUser, text: "Log In"),
-                      const SizedBox(height: 10),
                       Row(
                         children: [
                           Expanded(
@@ -132,6 +136,7 @@ class _SignupScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 20),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor:
@@ -152,12 +157,15 @@ class _SignupScreenState extends State<LoginScreen> {
                               ),
                             ),
                             const SizedBox(width: 8),
-                            const Text(
+                            Text(
                               "Continue with Google",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                color: Colors.white,
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? Colors.black
+                                    : Colors.black,
                               ),
                             ),
                           ],
@@ -186,17 +194,21 @@ class _SignupScreenState extends State<LoginScreen> {
                       const SizedBox(height: 20),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                          surfaceTintColor:
+                              const Color.fromARGB(255, 255, 151, 151),
+                          backgroundColor:
+                              const Color.fromARGB(255, 247, 175, 67),
                           padding: const EdgeInsets.symmetric(horizontal: 50),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) => const RucLoginScreen(),
                             ),
                           );
                         },
                         child: const Text(
-                          "For entreprises",
+                          "For Companies",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.black),
                         ),

@@ -1,18 +1,15 @@
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:job_match_app/presentation/screens/RegisterScreens/Login/Google/login_with_google.dart';
-import 'package:job_match_app/presentation/screens/RegisterScreens/Login/login_screen.dart';
-import 'package:job_match_app/presentation/screens/RegisterScreens/SignUp/sign_up_screen.dart';
+import 'package:job_match_app/presentation/screens/CompanyProfileInformation/main_profile_information.dart';
+import 'package:job_match_app/presentation/screens/HomeViews/home_view_company.dart';
+import 'package:job_match_app/presentation/screens/UserProfileInformation/main_profile_information.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/ForgotPassword/forgot_password.dart';
-import 'package:job_match_app/presentation/screens/HomeViews/home_view_user.dart';
-
+import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/login_button.dart';
-import 'package:job_match_app/presentation/widgets/LoginWidgets/snackbar.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/text_field_input.dart';
-
-import '../../../../../infrastructure/services/authentication.dart';
+import 'package:job_match_app/presentation/widgets/theme_button.dart';
 import '../../../../widgets/ProfileInformation/curved_painter.dart';
+import 'package:dio/dio.dart';
 
 class RucLoginScreen extends StatefulWidget {
   const RucLoginScreen({super.key});
@@ -24,7 +21,36 @@ class RucLoginScreen extends StatefulWidget {
 class _SignupScreenState extends State<RucLoginScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  final user = FirebaseAuth.instance.currentUser;
   bool isLoading = false;
+  final Dio _dio = Dio();
+  void verifyRuc() async {
+    try {
+      final response = await _dio.get(
+          'https://api.sunat.dev/ruc-premium/20100190797?apikey=B6IWa9QHQs7jOrrmLfBsj4xQ1K2f4gpFFMT82av4pjf4ExXP9CfYOyLcGfzEwGOR');
+      final Map<String, dynamic> jsonData = response.data;
+
+      String ruc = jsonData['body']['numeroRuc'];
+      String name = jsonData['body']['nombreComercial'];
+
+      if (response.statusCode == 200) {
+        print(ruc.toString());
+        print(name.toString());
+        Navigator.of(context).pushReplacement(user == null
+            ? MaterialPageRoute(
+                builder: (context) => const ProfilePageCompanies(),
+              )
+            : MaterialPageRoute(
+                builder: (context) => const CompanyScreen(),
+              ));
+      } else {
+        throw false;
+      }
+    } catch (e) {
+      throw Exception('Error : $e');
+    }
+  }
 
   @override
   void dispose() {
@@ -33,36 +59,14 @@ class _SignupScreenState extends State<RucLoginScreen> {
     passwordController.dispose();
   }
 
-  void loginUser() async {
-    setState(() {
-      isLoading = true;
-    });
-    String res = await AuthMethod().loginUser(
-        email: emailController.text, password: passwordController.text);
-
-    if (res == "success") {
-      setState(() {
-        isLoading = false;
-      });
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const UserScreen(),
-        ),
-      );
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-      showSnackBar(context, res);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? const Color.fromARGB(255, 28, 27, 27)
+            : Colors.white,
         body: SafeArea(
           child: Stack(children: [
             Container(
@@ -84,14 +88,23 @@ class _SignupScreenState extends State<RucLoginScreen> {
                 MediaQuery.of(context).size.width,
                 MediaQuery.of(context).size.height * 0.5,
               ),
-              painter: CurvedPainter(),
+              painter: CurvedPainter(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color.fromARGB(255, 28, 27, 27)
+                    : Colors.white,
+              ),
+            ),
+            const Positioned(
+              top: 0,
+              right: 0,
+              child: ThemeButton(),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 48, top: 25),
-              child: SizedBox(
-                height: height / 2.7,
+              padding: const EdgeInsets.only(bottom: 500),
+              child: Center(
                 child: Image.asset(
                   'assets/images/JobMatch.png',
+                  height: height * 1.2,
                   fit: BoxFit.contain,
                 ),
               ),
@@ -121,7 +134,7 @@ class _SignupScreenState extends State<RucLoginScreen> {
                         isPass: true,
                       ),
                       const ForgotPassword(),
-                      MyButtons(onTap: loginUser, text: "Log In"),
+                      MyButtons(onTap: verifyRuc, text: "Log In"),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           surfaceTintColor:
@@ -131,9 +144,10 @@ class _SignupScreenState extends State<RucLoginScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 50),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(
+                          Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                                builder: (context) => const LoginScreen()),
+                              builder: (context) => const LoginScreen(),
+                            ),
                           );
                         },
                         child: const Text(

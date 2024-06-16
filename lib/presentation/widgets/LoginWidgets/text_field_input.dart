@@ -20,7 +20,8 @@ class TextFieldInput extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: TextField(
-        style: const TextStyle(fontSize: 20),
+        cursorColor: Colors.black,
+        style: const TextStyle(fontSize: 20, color: Colors.black),
         controller: textEditingController,
         decoration: InputDecoration(
           prefixIcon: Icon(icon, color: Colors.black54),
@@ -32,7 +33,7 @@ class TextFieldInput extends StatelessWidget {
           ),
           border: InputBorder.none,
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.blue, width: 2),
+            borderSide: const BorderSide(color: Colors.transparent, width: 2),
             borderRadius: BorderRadius.circular(30),
           ),
           filled: true,

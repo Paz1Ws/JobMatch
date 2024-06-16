@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:job_match_app/presentation/screens/Redirect/Jc_welcome.dart';
 import '../../widgets/LoginWidgets/LoginScreens.dart';
 import '../RegisterScreens/RegisterScreens.dart';
 
@@ -29,7 +30,11 @@ class _CompanyScreenState extends State<CompanyScreen> {
                     MyButtons(
                       onTap: () async {
                         await FirebaseServices().googleSignOut();
-                        context.go('/userlogin');
+                        Navigator.of(context).pop(
+                          MaterialPageRoute(
+                            builder: (context) => const JcWelcomeScreen(),
+                          ),
+                        );
                       },
                       text: "Log Out",
                     ),

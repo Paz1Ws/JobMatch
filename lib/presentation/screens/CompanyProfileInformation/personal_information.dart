@@ -1,20 +1,15 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:job_match_app/infrastructure/provider/SignUpForm_prov.dart';
-import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
-import 'package:job_match_app/presentation/widgets/ProfileInformation/options_container.dart';
+import 'package:job_match_app/presentation/widgets/ProfileInformation/PersonalInformation/options_container.dart';
+import '../../widgets/ProfileInformation/PersonalInformation/information_container.dart';
 
-import '../../widgets/ProfileInformation/information_container.dart';
-
-class SignUpForm extends ConsumerWidget {
-  const SignUpForm({super.key});
+class SignUpFormCompanies extends ConsumerWidget {
+  const SignUpFormCompanies({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var signUpVariables = ref.watch(signUpFormVariablesProvider);
-
+    final signUpVariables = ref.watch(signUpFormVariablesProvider);
     return Padding(
       padding: const EdgeInsets.only(top: 40),
       child: Scaffold(
@@ -42,16 +37,15 @@ class SignUpForm extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16.0),
                   InformationContainer(
-                    controller: signUpVariables.emailController,
-                    labelText: 'Email',
+                    controller: signUpVariables.studyCenterController,
+                    keyboardType: TextInputType.phone,
+                    labelText: 'Phone number',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your email address';
+                        return 'Please enter your phone number';
                       }
-                      if (!RegExp(
-                              r"[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}")
-                          .hasMatch(value)) {
-                        return 'Please enter a valid email address';
+                      if (value.length != 10) {
+                        return 'Please enter a valid phone number';
                       }
                       return null;
                     },
@@ -59,10 +53,10 @@ class SignUpForm extends ConsumerWidget {
                   const SizedBox(height: 16.0),
                   InformationContainer(
                     controller: signUpVariables.professionController,
-                    labelText: 'Profesión',
+                    labelText: 'Main Profesión',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Ingrese su profesión';
+                        return 'Please enter your main profession';
                       }
                       return null;
                     },
@@ -74,17 +68,6 @@ class SignUpForm extends ConsumerWidget {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your place of residence';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 16.0),
-                  InformationContainer(
-                    controller: signUpVariables.studyCenterController,
-                    labelText: 'Study center',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your study center';
                       }
                       return null;
                     },
@@ -131,10 +114,11 @@ class SignUpForm extends ConsumerWidget {
                         backgroundColor: Colors.amber,
                       ),
                       onPressed: () {
-                        if (!signUpVariables.formKey.currentState!.validate()) {
+                        if (signUpVariables.formKey.currentState != null) {
+                          signUpVariables.formKey.currentState!.validate();
                           final candidateData = {
                             'name': signUpVariables.nameController.text,
-                            'email': signUpVariables.emailController.text,
+                            'phone': signUpVariables.phoneNumberController.text,
                             'profession':
                                 signUpVariables.professionController.text,
                             'studyCenter':
@@ -153,17 +137,11 @@ class SignUpForm extends ConsumerWidget {
                                 .map((skill) => skill.trim())
                                 .toList(),
                           };
+
                           signUpVariables.candidateCollection
                               .add(candidateData);
-                          ref.read(change_page).setpage2();
-                          const Visibility(
-                            visible: true,
-                            child: Text(
-                              'Go to the next page ->',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 36),
-                            ),
-                          );
+                        } else {
+                          null;
                         }
                       },
                       child: const Text(

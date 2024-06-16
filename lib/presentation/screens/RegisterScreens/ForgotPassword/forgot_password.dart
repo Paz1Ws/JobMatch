@@ -55,10 +55,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(),
                       const Text(
                         "Forgot Your Password",
                         style: TextStyle(
+                          color: Colors.orange,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -73,17 +73,31 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ),
                   const SizedBox(height: 20),
                   TextField(
+                    cursorColor: const Color.fromARGB(255, 0, 0, 0),
                     controller: emailController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                    decoration: InputDecoration(
                       labelText: "Enter the Email",
                       hintText: "eg abc@gmail.com",
+                      hintStyle: const TextStyle(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                      ),
+                      labelStyle:
+                          const TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                            color: Color.fromARGB(255, 0, 0, 0)),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(255, 243, 33, 33)),
                     onPressed: () async {
                       await auth
                           .sendPasswordResetEmail(email: emailController.text)

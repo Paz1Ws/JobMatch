@@ -4,11 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:job_match_app/presentation/screens/HomeViews/home_view_company.dart';
 import 'package:job_match_app/presentation/screens/HomeViews/home_view_user.dart';
 import 'package:job_match_app/presentation/screens/LoaderScreen/loader_screen.dart';
-import 'package:job_match_app/presentation/screens/ProfileInformation/main_profile_information.dart';
+import 'package:job_match_app/presentation/screens/UserProfileInformation/main_profile_information.dart';
 import 'package:job_match_app/presentation/screens/Redirect/Jc_welcome.dart';
-import 'package:job_match_app/presentation/screens/RegisterScreens/Login/login_screen.dart';
+import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForEnterprises/enterprises_login.dart';
+import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/RegisterScreens.dart';
-import 'package:job_match_app/presentation/widgets/ProfileInformation/add_photo.dart';
+import 'package:job_match_app/presentation/widgets/ProfileInformation/PhotoZone/add_photo.dart';
 
 _checkLogin(BuildContext context) {
   final user = FirebaseAuth.instance.currentUser;
@@ -29,7 +30,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/JcWelcomeScreen',
-      builder: (context, state) => JcWelcomeScreen(),
+      builder: (context, state) => const JcWelcomeScreen(),
     ),
     GoRoute(
       path: '/userlogin',
@@ -38,16 +39,18 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/enterpriselogin',
-      builder: (context, state) => const LoginScreen(),
+      builder: (context, state) => const RucLoginScreen(),
       redirect: (context, state) => _checkLogin(context),
     ),
     GoRoute(
       path: '/user_home',
-      builder: (context, state) => ProfilePageIndicator(),
+      builder: (context, state) => const ProfilePageIndicator(),
+      redirect: (context, state) => _checkLogin(context),
     ),
     GoRoute(
-        path: '/company_home',
-        builder: (context, state) => const CompanyScreen()),
-    GoRoute(path: '/photos', builder: (context, state) => const PhotosSection())
+      path: '/company_home',
+      builder: (context, state) => const CompanyScreen(),
+      redirect: (context, state) => _checkLogin(context),
+    ),
   ],
 );
