@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:job_match_app/infrastructure/provider/SignUpForm_prov.dart';
 import 'package:job_match_app/presentation/widgets/ProfileInformation/PersonalInformation/options_container.dart';
-import '../../widgets/ProfileInformation/PersonalInformation/information_container.dart';
+import '../../../widgets/ProfileInformation/PersonalInformation/information_container.dart';
 
 class SignUpFormCompanies extends ConsumerWidget {
   const SignUpFormCompanies({super.key});

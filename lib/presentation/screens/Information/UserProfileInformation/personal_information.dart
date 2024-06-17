@@ -8,7 +8,7 @@ import 'package:job_match_app/infrastructure/provider/SignUpForm_prov.dart';
 import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
 import 'package:job_match_app/presentation/widgets/ProfileInformation/PersonalInformation/options_container.dart';
 
-import '../../widgets/ProfileInformation/PersonalInformation/information_container.dart';
+import '../../../widgets/ProfileInformation/PersonalInformation/information_container.dart';
 
 class SignUpForm extends ConsumerWidget {
   const SignUpForm({super.key});

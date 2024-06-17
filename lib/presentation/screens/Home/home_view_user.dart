@@ -3,7 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:job_match_app/infrastructure/provider/screen_index_provider.dart';
-import 'package:job_match_app/presentation/widgets/HomePage/BottomNavigator/bottom_navigator.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/SwipeView/bottom_navigator.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/SwipeView/swipe_cards.dart';
 import 'package:job_match_app/presentation/widgets/theme_button.dart';
 import '../../widgets/LoginWidgets/LoginScreens.dart';
 import '../RegisterScreens/RegisterScreens.dart';
@@ -75,7 +76,16 @@ class _UserScreenState extends ConsumerState<UserScreen> {
                 ),
               ),
             ),
-            const Text("Page number 2"),
+            const Example(),
+            MyButtons(
+              disabled: false,
+              onTap: () async {
+                await FirebaseServices().googleSignOut();
+                await FirebaseServices().auth.signOut();
+                context.go('/JcWelcomeScreen');
+              },
+              text: "Log Out",
+            ),
           ],
         ),
       ),

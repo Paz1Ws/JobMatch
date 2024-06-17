@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:job_match_app/presentation/screens/CompanyProfileInformation/main_companyProfile_information.dart';
-import 'package:job_match_app/presentation/screens/HomeViews/home_view_company.dart';
+import 'package:job_match_app/presentation/screens/Information/CompanyProfileInformation/main_companyProfile_information.dart';
+import 'package:job_match_app/presentation/screens/Home/home_view_company.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/ForgotPassword/forgot_password.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/login_button.dart';

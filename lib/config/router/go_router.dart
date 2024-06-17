@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:job_match_app/presentation/screens/HomeViews/home_view_company.dart';
-import 'package:job_match_app/presentation/screens/HomeViews/home_view_user.dart';
+import 'package:job_match_app/presentation/screens/Home/home_view_company.dart';
+import 'package:job_match_app/presentation/screens/Home/home_view_user.dart';
 import 'package:job_match_app/presentation/screens/LoaderScreen/loader_screen.dart';
-import 'package:job_match_app/presentation/screens/UserProfileInformation/main_profile_information.dart';
+import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/main_profile_information.dart';
 import 'package:job_match_app/presentation/screens/Redirect/Jc_welcome.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForEnterprises/enterprises_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';

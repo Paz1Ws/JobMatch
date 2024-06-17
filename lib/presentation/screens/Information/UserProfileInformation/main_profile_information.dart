@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
 import 'package:job_match_app/presentation/screens/Redirect/Jc_welcome.dart';
-import 'package:job_match_app/presentation/screens/UserProfileInformation/images_profile.dart';
-import 'package:job_match_app/presentation/screens/UserProfileInformation/interest_profile.dart';
-import 'package:job_match_app/presentation/screens/UserProfileInformation/personal_information.dart';
+import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/images_profile.dart';
+import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/interest_profile.dart';
+import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/personal_information.dart';
 
 import 'package:job_match_app/presentation/widgets/theme_button.dart';
 import 'package:percent_indicator/percent_indicator.dart';
