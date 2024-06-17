@@ -4,15 +4,16 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:job_match_app/presentation/screens/HomeViews/home_view_user.dart';
 
-class SignUpInterest extends StatefulWidget {
-  const SignUpInterest({super.key});
+class SignUpInterestCompanies extends StatefulWidget {
+  const SignUpInterestCompanies({super.key});
 
   @override
-  _SignUpInterestState createState() => _SignUpInterestState();
+  _SignUpInterestCompaniesState createState() =>
+      _SignUpInterestCompaniesState();
 }
 
-class _SignUpInterestState extends State<SignUpInterest>
-    with AutomaticKeepAliveClientMixin<SignUpInterest> {
+class _SignUpInterestCompaniesState extends State<SignUpInterestCompanies>
+    with AutomaticKeepAliveClientMixin<SignUpInterestCompanies> {
   @override
   bool get wantKeepAlive => true;
 
@@ -164,8 +165,7 @@ class _SignUpInterestState extends State<SignUpInterest>
                         vertical: 16, horizontal: 16), // Add vertical padding
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const UserScreen()));
+                    context.go('/company_home');
                   },
                   child: Text("Let's begin your journey!",
                       style: TextStyle(

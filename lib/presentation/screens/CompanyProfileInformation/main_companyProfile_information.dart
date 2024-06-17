@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
-import 'package:job_match_app/presentation/screens/CompanyProfileInformation/interest_profile.dart';
-import 'package:job_match_app/presentation/screens/CompanyProfileInformation/personal_information.dart';
+import 'package:job_match_app/presentation/screens/CompanyProfileInformation/company_interest_profile.dart';
+import 'package:job_match_app/presentation/screens/CompanyProfileInformation/company_information.dart';
 import 'package:job_match_app/presentation/screens/UserProfileInformation/images_profile.dart';
 import 'package:job_match_app/presentation/widgets/theme_button.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -34,7 +35,7 @@ class ProfilePageCompanies extends ConsumerWidget {
                       child: IconButton(
                         iconSize: 40,
                         icon: const Icon(Icons.arrow_back),
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () => context.go('/JcWelcomeScreen'),
                       ),
                     ),
                     const ThemeButton(),

@@ -9,11 +9,9 @@ import 'package:job_match_app/presentation/screens/Redirect/Jc_welcome.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForEnterprises/enterprises_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/RegisterScreens.dart';
-import 'package:job_match_app/presentation/widgets/ProfileInformation/PhotoZone/add_photo.dart';
 
+final user = FirebaseAuth.instance.currentUser;
 _checkLogin(BuildContext context) {
-  final user = FirebaseAuth.instance.currentUser;
-
   if (user == null) {
     return '/JcWelcomeScreen';
   } else {
@@ -44,7 +42,8 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/user_home',
-      builder: (context, state) => const ProfilePageIndicator(),
+      builder: (context, state) =>
+          user != null ? const UserScreen() : const ProfilePageIndicator(),
       redirect: (context, state) => _checkLogin(context),
     ),
     GoRoute(

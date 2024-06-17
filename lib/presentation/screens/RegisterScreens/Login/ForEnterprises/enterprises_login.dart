@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:job_match_app/presentation/screens/CompanyProfileInformation/main_profile_information.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:job_match_app/presentation/screens/CompanyProfileInformation/main_companyProfile_information.dart';
 import 'package:job_match_app/presentation/screens/HomeViews/home_view_company.dart';
-import 'package:job_match_app/presentation/screens/UserProfileInformation/main_profile_information.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/ForgotPassword/forgot_password.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/login_button.dart';
@@ -11,57 +11,49 @@ import 'package:job_match_app/presentation/widgets/theme_button.dart';
 import '../../../../widgets/ProfileInformation/curved_painter.dart';
 import 'package:dio/dio.dart';
 
-class RucLoginScreen extends StatefulWidget {
+class RucLoginScreen extends ConsumerStatefulWidget {
   const RucLoginScreen({super.key});
 
   @override
-  State<RucLoginScreen> createState() => _SignupScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    return _SignupScreenState();
+  }
 }
 
-class _SignupScreenState extends State<RucLoginScreen> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+class _SignupScreenState extends ConsumerState<RucLoginScreen> {
+  TextEditingController rucController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  User? user = FirebaseAuth.instance.currentUser;
+  late String ruc;
+  late bool isLoading;
 
-  final user = FirebaseAuth.instance.currentUser;
-  bool isLoading = false;
+  @override
+  void initState() {
+    super.initState();
+    rucController = TextEditingController();
+    passwordController = TextEditingController();
+    user = FirebaseAuth.instance.currentUser;
+    isLoading = false;
+  }
+
   final Dio _dio = Dio();
   void verifyRuc() async {
-    try {
-      final response = await _dio.get(
-          'https://api.sunat.dev/ruc-premium/20100190797?apikey=B6IWa9QHQs7jOrrmLfBsj4xQ1K2f4gpFFMT82av4pjf4ExXP9CfYOyLcGfzEwGOR');
-      final Map<String, dynamic> jsonData = response.data;
-
-      String ruc = jsonData['body']['numeroRuc'];
-      String name = jsonData['body']['nombreComercial'];
-
-      if (response.statusCode == 200) {
-        print(ruc.toString());
-        print(name.toString());
-        Navigator.of(context).pushReplacement(user == null
-            ? MaterialPageRoute(
-                builder: (context) => const ProfilePageCompanies(),
-              )
-            : MaterialPageRoute(
-                builder: (context) => const CompanyScreen(),
-              ));
-      } else {
-        throw false;
-      }
-    } catch (e) {
-      throw Exception('Error : $e');
-    }
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (context) => const ProfilePageCompanies(),
+    ));
   }
 
   @override
   void dispose() {
     super.dispose();
-    emailController.dispose();
+    rucController.dispose();
     passwordController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Theme.of(context).brightness == Brightness.dark
@@ -122,7 +114,7 @@ class _SignupScreenState extends State<RucLoginScreen> {
                     children: [
                       TextFieldInput(
                         icon: Icons.person,
-                        textEditingController: emailController,
+                        textEditingController: rucController,
                         hintText: 'Enter your RUC',
                         textInputType: TextInputType.text,
                       ),
@@ -134,7 +126,11 @@ class _SignupScreenState extends State<RucLoginScreen> {
                         isPass: true,
                       ),
                       const ForgotPassword(),
-                      MyButtons(onTap: verifyRuc, text: "Log In"),
+                      MyButtons(
+                        disabled: isLoading ? true : false,
+                        onTap: isLoading ? null : verifyRuc,
+                        text: isLoading ? 'Loading...' : 'Login',
+                      ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           surfaceTintColor:

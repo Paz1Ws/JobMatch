@@ -107,7 +107,7 @@ class SignUpForm extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16.0),
                   OptionsContainer(
-                    onLanguageSelected: (language) =>
+                    onSelected: (language) =>
                         signUpVariables.selectedLanguage = language,
                     icon: const Icon(Icons.language),
                     text: 'Languaje',

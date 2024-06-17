@@ -28,13 +28,10 @@ class _CompanyScreenState extends State<CompanyScreen> {
                       style: TextStyle(fontSize: 24),
                     ),
                     MyButtons(
+                      disabled: false,
                       onTap: () async {
                         await FirebaseServices().googleSignOut();
-                        Navigator.of(context).pop(
-                          MaterialPageRoute(
-                            builder: (context) => const JcWelcomeScreen(),
-                          ),
-                        );
+                        context.go('/JcWelcomeScreen');
                       },
                       text: "Log Out",
                     ),

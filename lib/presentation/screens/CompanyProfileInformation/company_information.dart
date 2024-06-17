@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:job_match_app/infrastructure/provider/SignUpForm_prov.dart';
 import 'package:job_match_app/presentation/widgets/ProfileInformation/PersonalInformation/options_container.dart';
 import '../../widgets/ProfileInformation/PersonalInformation/information_container.dart';
@@ -22,30 +23,26 @@ class SignUpFormCompanies extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Personal Information",
+                    "Company Information",
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36),
                   ),
                   InformationContainer(
                     controller: signUpVariables.nameController,
-                    labelText: 'Name',
+                    labelText: 'Company Name',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your name';
+                        return 'Please enter the company name';
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 16.0),
                   InformationContainer(
-                    controller: signUpVariables.studyCenterController,
-                    keyboardType: TextInputType.phone,
-                    labelText: 'Phone number',
+                    controller: signUpVariables.socialReason,
+                    labelText: 'Social Reason',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your phone number';
-                      }
-                      if (value.length != 10) {
-                        return 'Please enter a valid phone number';
+                        return 'Please enter the company name';
                       }
                       return null;
                     },
@@ -53,10 +50,10 @@ class SignUpFormCompanies extends ConsumerWidget {
                   const SizedBox(height: 16.0),
                   InformationContainer(
                     controller: signUpVariables.professionController,
-                    labelText: 'Main Profesión',
+                    labelText: 'Main Activity',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your main profession';
+                        return 'Please enter the main activity';
                       }
                       return null;
                     },
@@ -64,10 +61,10 @@ class SignUpFormCompanies extends ConsumerWidget {
                   const SizedBox(height: 16.0),
                   InformationContainer(
                     controller: signUpVariables.placeOfResidenceController,
-                    labelText: 'Place of residence',
+                    labelText: 'Localization',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your place of residence';
+                        return 'Please enter the localization of the company';
                       }
                       return null;
                     },
@@ -75,77 +72,59 @@ class SignUpFormCompanies extends ConsumerWidget {
                   const SizedBox(height: 16.0),
                   InformationContainer(
                     controller: signUpVariables.levelOfEducationController,
-                    labelText: 'Level of education',
+                    labelText: 'Legal Representative (Name, DNI, Charge)',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your level of education';
+                        return 'Please enter the level of education';
                       }
                       return null;
                     },
                   ),
                   const SizedBox(height: 16.0),
-                  InformationContainer(
-                    controller: signUpVariables.lastJobController,
-                    labelText: 'Last job, position and company',
-                  ),
-                  const SizedBox(height: 16.0),
-                  InformationContainer(
-                    controller: signUpVariables.skillsController,
-                    labelText: 'Skills (separate with commas)',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your skills';
-                      }
-                      return null;
-                    },
-                  ),
                   const SizedBox(height: 16.0),
                   OptionsContainer(
-                    onLanguageSelected: (language) =>
-                        signUpVariables.selectedLanguage = language,
-                    icon: const Icon(Icons.language),
-                    text: 'Languaje',
+                    onSelected: (typeJob) => signUpVariables.typeJob = typeJob,
+                    icon: const Icon(FontAwesomeIcons.briefcase),
+                    text: 'Types of Jobs Offered',
                     text_button: 'Select',
                   ),
                   const SizedBox(height: 16.0),
+                  OptionsContainer(
+                    onSelected: (language) =>
+                        signUpVariables.selectedLanguage = language,
+                    icon: const Icon(Icons.language),
+                    text: 'Language',
+                    text_button: 'Select',
+                  ),
+                  const SizedBox(height: 32.0),
                   Center(
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                        fixedSize: const Size(200, 50),
                         backgroundColor: Colors.amber,
                       ),
                       onPressed: () {
                         if (signUpVariables.formKey.currentState != null) {
                           signUpVariables.formKey.currentState!.validate();
-                          final candidateData = {
-                            'name': signUpVariables.nameController.text,
-                            'phone': signUpVariables.phoneNumberController.text,
-                            'profession':
-                                signUpVariables.professionController.text,
-                            'studyCenter':
-                                signUpVariables.studyCenterController.text,
+                          final companyData = {
+                            'companyName': signUpVariables.nameController.text,
                             'language': signUpVariables.selectedLanguage,
-                            'levelOfEducation':
-                                signUpVariables.levelOfEducationController.text,
-                            'placeOfResidence':
+                            'localization':
                                 signUpVariables.placeOfResidenceController.text,
-                            'lastJob': signUpVariables.lastJobController.text
-                                .split(',')
-                                .map((skill) => skill.trim())
-                                .toList(),
-                            'skills': signUpVariables.skillsController.text
-                                .split(',')
-                                .map((skill) => skill.trim())
-                                .toList(),
+                            'typeJobs': signUpVariables.typeJob,
+                            'mainActivity': signUpVariables.mainActivity.text,
+                            'legalRepresentative':
+                                signUpVariables.legalRepresentative.text,
+                            'socialReason': signUpVariables.socialReason.text,
                           };
 
-                          signUpVariables.candidateCollection
-                              .add(candidateData);
+                          signUpVariables.enterpriseCollection.add(companyData);
                         } else {
                           null;
                         }
                       },
                       child: const Text(
-                        'Guardar cambios',
+                        'Save Changes',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
                       ),

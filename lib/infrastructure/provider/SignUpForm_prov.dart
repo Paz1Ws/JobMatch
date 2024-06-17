@@ -30,6 +30,15 @@ final studyCenterControllerProvider =
 final skillsControllerProvider = Provider((ref) => TextEditingController());
 
 var selectedLanguageProvider = Provider((ref) => '');
+// For companies
+final enterpriseCollectionProvider = Provider((ref) {
+  final firestore = ref.watch(firestoreProvider);
+  return firestore.collection('enterprises');
+});
+var typeJobProvider = Provider((ref) => '');
+final mainActivityProvider = Provider((ref) => TextEditingController());
+final legalRepresentativeProvider = Provider((ref) => TextEditingController());
+final socialReasonProvider = Provider((ref) => TextEditingController());
 var isButtonEnabledProvider = Provider((ref) => false);
 
 class SignUpFormVariables {
@@ -44,7 +53,15 @@ class SignUpFormVariables {
   final TextEditingController lastJobController;
   final TextEditingController placeOfResidenceController;
   final TextEditingController phoneNumberController;
+  // For companies
+
+  final CollectionReference enterpriseCollection;
+  final TextEditingController mainActivity;
+  final TextEditingController legalRepresentative;
+  final TextEditingController socialReason;
+
   String selectedLanguage;
+  String typeJob;
 
   SignUpFormVariables({
     required this.phoneNumberController,
@@ -56,13 +73,20 @@ class SignUpFormVariables {
     required this.studyCenterController,
     required this.skillsController,
     required this.selectedLanguage,
+    required this.typeJob,
     required this.levelOfEducationController,
     required this.placeOfResidenceController,
     required this.lastJobController,
+    // For companies
+    required this.enterpriseCollection,
+    required this.mainActivity,
+    required this.legalRepresentative,
+    required this.socialReason,
   });
 }
 
 final signUpFormVariablesProvider = Provider((ref) {
+  // For users
   final formKey = ref.watch(formKeyProvider);
   final firestore = ref.watch(firestoreProvider);
   final candidateCollection = ref.watch(candidateCollectionProvider);
@@ -77,6 +101,12 @@ final signUpFormVariablesProvider = Provider((ref) {
       ref.watch(placeOfResidenceControllerProvider);
   final levelOfEducationController =
       ref.watch(levelOfEducationControllerProvider);
+  // For companies
+  final enterpriseCollection = ref.watch(enterpriseCollectionProvider);
+  final typeJob = ref.watch(typeJobProvider);
+  final mainActivityController = ref.watch(mainActivityProvider);
+  final legalRepresentativeController = ref.watch(legalRepresentativeProvider);
+  final socialReasonController = ref.watch(socialReasonProvider);
 
   return SignUpFormVariables(
     phoneNumberController: phoneNumberController,
@@ -88,8 +118,14 @@ final signUpFormVariablesProvider = Provider((ref) {
     studyCenterController: studyCenterController,
     skillsController: skillsController,
     selectedLanguage: selectedLanguage,
+    typeJob: typeJob,
     lastJobController: lastJobController,
     levelOfEducationController: levelOfEducationController,
     placeOfResidenceController: placeOfResidenceController,
+    // For companies
+    enterpriseCollection: enterpriseCollection,
+    mainActivity: mainActivityController,
+    legalRepresentative: legalRepresentativeController,
+    socialReason: socialReasonController,
   );
 });

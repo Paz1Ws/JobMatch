@@ -89,7 +89,7 @@ class _SignupScreenState extends State<SignupScreen> {
               textInputType: TextInputType.text,
               isPass: true,
             ),
-            MyButtons(onTap: signupUser, text: "Sign Up"),
+            MyButtons(onTap: signupUser, text: "Sign Up", disabled: false),
             const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

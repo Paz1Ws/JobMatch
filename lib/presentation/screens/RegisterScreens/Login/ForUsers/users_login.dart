@@ -124,7 +124,8 @@ class _SignupScreenState extends State<LoginScreen> {
                         isPass: true,
                       ),
                       const ForgotPassword(),
-                      MyButtons(onTap: loginUser, text: "Log In"),
+                      MyButtons(
+                          onTap: loginUser, text: "Log In", disabled: false),
                       Row(
                         children: [
                           Expanded(
