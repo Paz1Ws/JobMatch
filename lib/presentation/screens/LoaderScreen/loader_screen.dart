@@ -1,10 +1,6 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:job_match_app/presentation/screens/Redirect/Jc_welcome.dart';
-import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
-import 'package:job_match_app/presentation/screens/Home/home_view_user.dart';
 import 'package:video_player/video_player.dart';
 
 class ScreenLoader extends StatefulWidget {

@@ -12,7 +12,9 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).brightness == Brightness.dark
+          ? const Color.fromARGB(255, 34, 33, 33)
+          : Colors.white,
       body: Stack(
         children: [
           CustomScrollView(
@@ -45,9 +47,11 @@ class _DetailsPageState extends State<DetailsPage> {
                   title: Container(
                     height: 67,
                     padding: const EdgeInsets.all(16),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color.fromARGB(255, 34, 33, 33)
+                          : Colors.white,
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(28),
                         topRight: Radius.circular(28),
                       ),
@@ -61,10 +65,13 @@ class _DetailsPageState extends State<DetailsPage> {
                             Row(
                               children: [
                                 const SizedBox(width: 2),
-                                const Text(
+                                Text(
                                   'My Company',
                                   style: TextStyle(
-                                    color: Colors.black,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white
+                                        : Colors.black,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -123,11 +130,6 @@ class _DetailsPageState extends State<DetailsPage> {
                                   color: Colors.green[300],
                                   borderRadius: BorderRadius.circular(100),
                                 ),
-                              ),
-                              Container(
-                                height: 18,
-                                width: 18,
-                                color: Colors.white,
                               ),
                               Center(
                                 child: Container(
@@ -256,20 +258,23 @@ class _DetailsPageState extends State<DetailsPage> {
                       endIndent: 32,
                     ),
                     const SizedBox(height: 16),
-                    const Padding(
-                      padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'Interests',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white
+                                  : Colors.black,
                               fontWeight: FontWeight.bold,
                               fontSize: 16,
                             ),
                           ),
-                          Text(
+                          const Text(
                             '3 Similar',
                             style: TextStyle(
                               color: Colors.deepOrange,

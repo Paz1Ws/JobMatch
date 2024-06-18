@@ -1,13 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:job_match_app/infrastructure/provider/SignUpForm_prov.dart';
 import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
 import 'package:job_match_app/presentation/widgets/ProfileInformation/PersonalInformation/options_container.dart';
-
 import '../../../widgets/ProfileInformation/PersonalInformation/information_container.dart';
 
 class SignUpForm extends ConsumerWidget {
@@ -16,6 +12,7 @@ class SignUpForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final signUpVariables = ref.watch(signUpFormVariablesProvider);
+
     return Padding(
       padding: const EdgeInsets.only(top: 40),
       child: Scaffold(
@@ -43,15 +40,12 @@ class SignUpForm extends ConsumerWidget {
                   ),
                   const SizedBox(height: 16.0),
                   InformationContainer(
-                    controller: signUpVariables.studyCenterController,
+                    controller: signUpVariables.phoneNumberController,
                     keyboardType: TextInputType.phone,
                     labelText: 'Phone number',
                     validator: (value) {
-                      if (value == null || value.isEmpty) {
+                      if (value.toString().length != 9) {
                         return 'Please enter your phone number';
-                      }
-                      if (value.length != 10) {
-                        return 'Please enter a valid phone number';
                       }
                       return null;
                     },
@@ -120,8 +114,7 @@ class SignUpForm extends ConsumerWidget {
                         backgroundColor: Colors.amber,
                       ),
                       onPressed: () {
-                        if (signUpVariables.formKey.currentState != null) {
-                          signUpVariables.formKey.currentState!.validate();
+                        if (signUpVariables.formKey.currentState!.validate()) {
                           final candidateData = {
                             'name': signUpVariables.nameController.text,
                             'phone': signUpVariables.phoneNumberController.text,
@@ -146,14 +139,33 @@ class SignUpForm extends ConsumerWidget {
 
                           signUpVariables.candidateCollection
                               .add(candidateData);
+                          ref
+                              .read(change_page_valid)
+                              .changePageValidMethod(true);
                         } else {
-                          null;
+                          print("FormKey is null");
                         }
                       },
                       child: const Text(
-                        'Guardar cambios',
+                        'Save Information',
                         style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  Visibility(
+                    visible: ref.watch(change_page_valid).changepageValid,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 220),
+                      child: Text(
+                        'Only Swipe ->',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Colors.black,
+                        ),
                       ),
                     ),
                   )

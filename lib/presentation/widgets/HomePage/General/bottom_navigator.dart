@@ -4,9 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:job_match_app/infrastructure/provider/screen_index_provider.dart';
 
+// ignore: must_be_immutable
 class BottomNavigator extends ConsumerStatefulWidget {
-  // final VoidCallback onPressed;
-  const BottomNavigator({
+  bool isEnterprise;
+
+  BottomNavigator({
+    required this.isEnterprise,
     super.key,
   });
   @override
@@ -29,8 +32,9 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: GNav(
+          duration: const Duration(milliseconds: 250),
           tabBorderRadius: 20,
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.grey.withOpacity(0.1),
           gap: 5,
           selectedIndex: _selectedIndex,
           onTabChange: (index) {
@@ -70,8 +74,9 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
               onPressed: () {
                 ref.read(counterProvider.notifier).update((state) => 2);
               },
-              icon: FontAwesomeIcons.briefcase,
-              text: 'Jobs',
+              icon:
+                  widget.isEnterprise ? Icons.work : FontAwesomeIcons.briefcase,
+              text: widget.isEnterprise ? 'Add Job' : 'Jobs',
               iconColor: textColor,
               textColor: textColor,
               iconSize: 22,

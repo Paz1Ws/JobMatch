@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:job_match_app/presentation/screens/Home/home_view_company.dart';
-import 'package:job_match_app/presentation/screens/Home/home_view_user.dart';
+import 'package:job_match_app/presentation/screens/Home/EnterpriseViews/home_view_company.dart';
+import 'package:job_match_app/presentation/screens/Home/UserViews/home_view_user.dart';
 import 'package:job_match_app/presentation/screens/LoaderScreen/loader_screen.dart';
 import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/main_profile_information.dart';
 import 'package:job_match_app/presentation/screens/Redirect/Jc_welcome.dart';
@@ -48,7 +48,8 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/company_home',
-      builder: (context, state) => const CompanyScreen(),
+      builder: (context, state) =>
+          user != null ? const CompanyScreen() : const ProfilePageIndicator(),
       redirect: (context, state) => _checkLogin(context),
     ),
   ],

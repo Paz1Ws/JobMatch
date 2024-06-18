@@ -14,3 +14,16 @@ class ChangePage extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+final change_page_valid = ChangeNotifierProvider<ChangePageValid>(
+    (ref) => ChangePageValid(changepageValid: false));
+
+class ChangePageValid extends ChangeNotifier {
+  bool changepageValid;
+
+  ChangePageValid({required this.changepageValid});
+  void changePageValidMethod(bool page) {
+    changepageValid = page;
+    notifyListeners();
+  }
+}

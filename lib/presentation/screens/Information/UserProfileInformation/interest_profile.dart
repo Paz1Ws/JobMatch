@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
-import 'package:job_match_app/presentation/screens/Home/home_view_user.dart';
+import 'package:job_match_app/presentation/screens/Home/UserViews/home_view_user.dart';
 
 class SignUpInterest extends StatefulWidget {
   const SignUpInterest({super.key});
@@ -164,7 +162,7 @@ class _SignUpInterestState extends State<SignUpInterest>
                         vertical: 16, horizontal: 16), // Add vertical padding
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => const UserScreen()));
                   },
                   child: Text("Let's begin your journey!",

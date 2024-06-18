@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
-import 'package:job_match_app/presentation/screens/Home/home_view_user.dart';
+import 'package:job_match_app/presentation/screens/Home/UserViews/home_view_user.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/login_button.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/snackbar.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/text_field_input.dart';

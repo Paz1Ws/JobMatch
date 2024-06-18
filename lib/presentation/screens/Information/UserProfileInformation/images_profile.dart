@@ -4,17 +4,21 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
 import 'package:job_match_app/presentation/widgets/ProfileInformation/PhotoZone/image_container.dart';
 
-class PhotoSection extends StatefulWidget {
+class PhotoSection extends ConsumerStatefulWidget {
   const PhotoSection({super.key});
 
   @override
-  State<PhotoSection> createState() => _PhotoSectionState();
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    return _PhotoSectionState();
+  }
 }
 
-class _PhotoSectionState extends State<PhotoSection> {
+class _PhotoSectionState extends ConsumerState<PhotoSection> {
   Uint8List? _image;
 
   File? selectedImage;
@@ -105,25 +109,42 @@ class _PhotoSectionState extends State<PhotoSection> {
           ),
           Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.sizeOf(context).height * 0.83,
-              left: 220.0,
+              top: MediaQuery.sizeOf(context).height * 0.84,
+              left: 130.0,
             ),
             child: ElevatedButton(
               onPressed: () {
-                // Add your logic here
+                _image != null
+                    ? ref.read(change_page_valid).changePageValidMethod(true)
+                    : ref.read(change_page_valid).changePageValidMethod(false);
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.amber),
-              child: Text(
-                'Swipe to continue',
+              child: const Text(
+                'Save Photos',
                 style: TextStyle(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : Colors.black,
+                  color: Colors.black,
                   fontSize: 16.0,
                 ),
               ),
             ),
           ),
+          Visibility(
+            visible: ref.watch(change_page_valid).changepageValid,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: 200, top: MediaQuery.sizeOf(context).height / 1.11),
+              child: Text(
+                'Only Swipe ->',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

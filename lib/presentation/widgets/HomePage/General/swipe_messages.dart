@@ -11,7 +11,7 @@ class SwipeText extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedOpacity(
       duration: Duration(milliseconds: 300),
-      opacity: 1.0, // Opacidad inicial
+      opacity: 1.0,
       child: Align(
         alignment: alignment,
         child: Text(

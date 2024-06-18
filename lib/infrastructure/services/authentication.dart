@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -16,8 +18,6 @@ class AuthMethod {
           email: email,
           password: password,
         );
-        // add user to your  firestore database
-        print(cred.user!.uid);
         await _firestore.collection("users").doc(cred.user!.uid).set({
           'name': name,
           'uid': cred.user!.uid,

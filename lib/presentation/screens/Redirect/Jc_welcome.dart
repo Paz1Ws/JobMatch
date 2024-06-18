@@ -10,7 +10,36 @@ class JcWelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bienvenido a JobMatch'),
+        title: RichText(
+          text: TextSpan(
+            text: 'Bienvenido a ',
+            style: TextStyle(
+                fontSize: 20,
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : Colors.black),
+            children: <TextSpan>[
+              TextSpan(
+                text: 'JobMatch',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  foreground: Paint()
+                    ..shader = LinearGradient(
+                      colors: Theme.of(context).brightness == Brightness.dark
+                          ? [Colors.white, Colors.orange]
+                          : [
+                              const Color.fromARGB(255, 255, 2, 2),
+                              const Color.fromARGB(255, 255, 225, 0)
+                            ],
+                      stops: const [0.3, 1.4],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ).createShader(const Rect.fromLTRB(0, 0, 200, 70)),
+                ),
+              ),
+            ],
+          ),
+        ),
         actions: const [
           Padding(
             padding: EdgeInsets.only(left: 0, top: 5, right: 1),
@@ -34,39 +63,47 @@ class JcWelcomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only(
-                  top: 150,
-                  left: 20,
-                ),
-                child: FilledButton(
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        const Color.fromARGB(255, 243, 89, 33)),
+              padding: const EdgeInsets.only(
+                top: 180,
+                left: 20,
+              ),
+              child: Row(
+                children: [
+                  FilledButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        const Color.fromARGB(255, 243, 89, 33),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ));
+                    },
+                    child: const Text(
+                      'Candidato',
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                    ),
                   ),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const LoginScreen()));
-                  },
-                  child: const Text(
-                    'Candidato',
-                    style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                  const SizedBox(width: 130),
+                  FilledButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                        const Color.fromARGB(255, 243, 89, 33),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const RucLoginScreen(),
+                      ));
+                    },
+                    child: const Text(
+                      'Empresa',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                )),
-            const SizedBox(height: 16),
-            Positioned(
-              right: 40,
-              bottom: 390,
-              child: FilledButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
-                      const Color.fromARGB(255, 243, 89, 33)),
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const RucLoginScreen()));
-                },
-                child: const Text('Empresa',
-                    style: TextStyle(color: Colors.white)),
+                ],
               ),
             ),
             Padding(
