@@ -8,7 +8,7 @@ import 'package:job_match_app/presentation/screens/Information/UserProfileInform
 import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/interest_profile.dart';
 import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/personal_information.dart';
 
-import 'package:job_match_app/presentation/widgets/theme_button.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/General/theme_button.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ProfilePageIndicator extends ConsumerWidget {

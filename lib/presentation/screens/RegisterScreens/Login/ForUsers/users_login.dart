@@ -8,7 +8,7 @@ import 'package:job_match_app/presentation/widgets/LoginWidgets/login_button.dar
 import 'package:job_match_app/presentation/widgets/LoginWidgets/snackbar.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/text_field_input.dart';
 import 'package:job_match_app/presentation/widgets/ProfileInformation/curved_painter.dart';
-import 'package:job_match_app/presentation/widgets/theme_button.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/General/theme_button.dart';
 import '../../../../../infrastructure/services/authentication.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -68,7 +68,7 @@ class _SignupScreenState extends State<LoginScreen> {
                   end: Alignment(0.0, 0.4),
                   begin: Alignment(0.0, -1),
                   colors: <Color>[
-                    Colors.pink,
+                    Color.fromARGB(255, 202, 28, 86),
                     Colors.deepOrange,
                   ],
                 ),

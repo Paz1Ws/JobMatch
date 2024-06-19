@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/main_profile_information.dart';
 
-class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key});
+class CardsDetails extends StatefulWidget {
+  const CardsDetails({super.key});
 
   @override
-  _DetailsPageState createState() => _DetailsPageState();
+  _CardsDetailsState createState() => _CardsDetailsState();
 }
 
-class _DetailsPageState extends State<DetailsPage> {
+class _CardsDetailsState extends State<CardsDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForEnterprises/enterprises_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
-import 'package:job_match_app/presentation/widgets/theme_button.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/General/theme_button.dart';
 
 class JcWelcomeScreen extends StatelessWidget {
   const JcWelcomeScreen({super.key});

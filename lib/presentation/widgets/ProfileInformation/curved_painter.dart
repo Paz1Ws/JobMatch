@@ -7,7 +7,7 @@ class CurvedPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
       ..color = color
-      ..strokeWidth = 15;
+      ..strokeWidth = 10;
 
     var path = Path();
 

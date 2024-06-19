@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:job_match_app/infrastructure/provider/screen_index_provider.dart';
 import 'package:job_match_app/presentation/screens/Home/UserViews/aplied_jobs.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/ProfileHome/main_profile.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/settings_profile.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/bottom_navigator.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/swipe_cards.dart';
 import '../../../widgets/LoginWidgets/LoginScreens.dart';
@@ -112,6 +114,7 @@ class _UserScreenState extends ConsumerState<UserScreen> {
               const AppliedJobs(
                 numberOfJobs: 50,
               ),
+              const MainProfileScreen(),
               MyButtons(
                 disabled: false,
                 onTap: () async {

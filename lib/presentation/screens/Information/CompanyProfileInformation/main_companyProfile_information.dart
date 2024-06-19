@@ -5,7 +5,7 @@ import 'package:job_match_app/infrastructure/provider/profile_information_prov.d
 import 'package:job_match_app/presentation/screens/Information/CompanyProfileInformation/company_interest_profile.dart';
 import 'package:job_match_app/presentation/screens/Information/CompanyProfileInformation/company_information.dart';
 import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/images_profile.dart';
-import 'package:job_match_app/presentation/widgets/theme_button.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/General/theme_button.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class ProfilePageCompanies extends ConsumerWidget {

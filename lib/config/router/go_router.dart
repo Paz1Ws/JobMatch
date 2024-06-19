@@ -5,10 +5,11 @@ import 'package:job_match_app/presentation/screens/Home/EnterpriseViews/home_vie
 import 'package:job_match_app/presentation/screens/Home/UserViews/home_view_user.dart';
 import 'package:job_match_app/presentation/screens/LoaderScreen/loader_screen.dart';
 import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/main_profile_information.dart';
-import 'package:job_match_app/presentation/screens/Redirect/Jc_welcome.dart';
+import 'package:job_match_app/presentation/screens/JC%20Redirect/Jc_welcome.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForEnterprises/enterprises_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/RegisterScreens.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/settings_profile.dart';
 
 final user = FirebaseAuth.instance.currentUser;
 _checkLogin(BuildContext context) {
@@ -52,5 +53,9 @@ final GoRouter router = GoRouter(
           user != null ? const CompanyScreen() : const ProfilePageIndicator(),
       redirect: (context, state) => _checkLogin(context),
     ),
+    GoRoute(
+      path: '/user_profile_information',
+      builder: (context, state) => const AccountScreen(),
+    )
   ],
 );
