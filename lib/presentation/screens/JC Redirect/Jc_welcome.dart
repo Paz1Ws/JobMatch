@@ -81,8 +81,7 @@ class JcWelcomeScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              FlipInY(child: const LoginScreen()),
+                          builder: (context) => const LoginScreen(),
                         ));
                       },
                       child: const Text(
@@ -100,8 +99,7 @@ class JcWelcomeScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              FlipInX(child: const RucLoginScreen()),
+                          builder: (context) => const RucLoginScreen(),
                         ));
                       },
                       child: const Text(

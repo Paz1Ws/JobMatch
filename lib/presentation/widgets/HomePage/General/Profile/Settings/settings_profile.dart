@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:job_match_app/config/theme/theme.dart';
 import 'package:job_match_app/infrastructure/provider/screen_index_provider.dart';
-import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/edit_screen.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/edit_account_screen.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/forward_button.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/setting_item.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/setting_switch.dart';

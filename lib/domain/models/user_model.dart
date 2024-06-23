@@ -1,331 +1,149 @@
-class Welcome {
-  Users users;
+class PersonalInfo {
+  final String? names;
+  final String? birthdate;
+  final String? civilStatus;
+  final String? gender;
+  final String? country;
+  final String? city;
+  final String? province;
+  final String? address;
 
-  Welcome({
-    required this.users,
+  PersonalInfo({
+    required this.names,
+    this.birthdate,
+    this.civilStatus,
+    this.gender,
+    this.country,
+    required this.city,
+    required this.province,
+    required this.address,
   });
 
-  Welcome copyWith({
-    Users? users,
-  }) =>
-      Welcome(
-        users: users ?? this.users,
+  factory PersonalInfo.fromJson(Map<String?, dynamic> json) => PersonalInfo(
+        names: json['names'] as String?,
+        birthdate: json['birthdate'] as String?,
+        civilStatus: json['civilStatus'] as String?,
+        gender: json['gender'] as String?,
+        country: json['country'] as String?,
+        city: json['city'] as String?,
+        province: json['province'] as String?,
+        address: json['address'] as String?,
       );
 }
 
-class Users {
-  UserId userId;
+class UserInfo {
+  final String? description; // Allow null for optional fields
 
-  Users({
-    required this.userId,
+  UserInfo({
+    this.description,
   });
 
-  Users copyWith({
-    UserId? userId,
-  }) =>
-      Users(
-        userId: userId ?? this.userId,
-      );
-}
-
-class UserId {
-  String uid;
-  PersonalInfo personalInfo;
-  UserInfo userInfo;
-  JobInfo jobInfo;
-  Education education;
-  Contact contact;
-  Experience experience;
-  List<String> skills;
-
-  UserId({
-    required this.uid,
-    required this.personalInfo,
-    required this.userInfo,
-    required this.jobInfo,
-    required this.education,
-    required this.contact,
-    required this.experience,
-    required this.skills,
-  });
-
-  UserId copyWith({
-    String? uid,
-    PersonalInfo? personalInfo,
-    UserInfo? userInfo,
-    JobInfo? jobInfo,
-    Education? education,
-    Contact? contact,
-    Experience? experience,
-    List<String>? skills,
-  }) =>
-      UserId(
-        uid: uid ?? this.uid,
-        personalInfo: personalInfo ?? this.personalInfo,
-        userInfo: userInfo ?? this.userInfo,
-        jobInfo: jobInfo ?? this.jobInfo,
-        education: education ?? this.education,
-        contact: contact ?? this.contact,
-        experience: experience ?? this.experience,
-        skills: skills ?? this.skills,
-      );
-}
-
-class Contact {
-  String email;
-  String phone;
-  List<String> profiles;
-
-  Contact({
-    required this.email,
-    required this.phone,
-    required this.profiles,
-  });
-
-  Contact copyWith({
-    String? email,
-    String? phone,
-    List<String>? profiles,
-  }) =>
-      Contact(
-        email: email ?? this.email,
-        phone: phone ?? this.phone,
-        profiles: profiles ?? this.profiles,
+  factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
+        description: json['description'] as String?,
       );
 }
 
 class Education {
-  String status;
-  String profession;
-  String studyCenter;
-  String educationYield;
-  String infoAditional;
+  final String? status;
+  final String? profession;
+  final String? studyCenter;
+  final String? yield;
+  final String? infoAditional;
 
   Education({
-    required this.status,
-    required this.profession,
+    this.status,
+    this.profession,
     required this.studyCenter,
-    required this.educationYield,
-    required this.infoAditional,
+    this.yield,
+    this.infoAditional,
   });
 
-  Education copyWith({
-    String? status,
-    String? profession,
-    String? studyCenter,
-    String? educationYield,
-    String? infoAditional,
-  }) =>
-      Education(
-        status: status ?? this.status,
-        profession: profession ?? this.profession,
-        studyCenter: studyCenter ?? this.studyCenter,
-        educationYield: educationYield ?? this.educationYield,
-        infoAditional: infoAditional ?? this.infoAditional,
+  factory Education.fromJson(Map<String, dynamic> json) => Education(
+        status: json['status'] as String?,
+        profession: json['profession'] as String?,
+        studyCenter: json['studyCenter'] as String?,
+        yield: json['yield'] as String?,
+        infoAditional: json['infoAditional'] as String?,
       );
 }
 
-class Experience {
-  List<Professional> professional;
-  List<Certificate> certificates;
-  List<Language> language;
+class ProfessionalExperience {
+  final bool? active;
+  final String? company;
+  final String? description; // Allow null for optional fields
+  final String? position;
+  final String? startDate;
+  final String? endDate;
+  final List<String?> skills;
 
-  Experience({
-    required this.professional,
-    required this.certificates,
-    required this.language,
-  });
-
-  Experience copyWith({
-    List<Professional>? professional,
-    List<Certificate>? certificates,
-    List<Language>? language,
-  }) =>
-      Experience(
-        professional: professional ?? this.professional,
-        certificates: certificates ?? this.certificates,
-        language: language ?? this.language,
-      );
-}
-
-class Certificate {
-  String name;
-  String organization;
-  String startDate;
-  String expirationDate;
-  String credentialId;
-  String credentialUrl;
-  List<String> skills;
-
-  Certificate({
-    required this.name,
-    required this.organization,
-    required this.startDate,
-    required this.expirationDate,
-    required this.credentialId,
-    required this.credentialUrl,
-    required this.skills,
-  });
-
-  Certificate copyWith({
-    String? name,
-    String? organization,
-    String? startDate,
-    String? expirationDate,
-    String? credentialId,
-    String? credentialUrl,
-    List<String>? skills,
-  }) =>
-      Certificate(
-        name: name ?? this.name,
-        organization: organization ?? this.organization,
-        startDate: startDate ?? this.startDate,
-        expirationDate: expirationDate ?? this.expirationDate,
-        credentialId: credentialId ?? this.credentialId,
-        credentialUrl: credentialUrl ?? this.credentialUrl,
-        skills: skills ?? this.skills,
-      );
-}
-
-class Language {
-  String name;
-  String type;
-
-  Language({
-    required this.name,
-    required this.type,
-  });
-
-  Language copyWith({
-    String? name,
-    String? type,
-  }) =>
-      Language(
-        name: name ?? this.name,
-        type: type ?? this.type,
-      );
-}
-
-class Professional {
-  bool active;
-  String company;
-  String position;
-  String startDate;
-  String endDate;
-  List<String> skills;
-
-  Professional({
+  ProfessionalExperience({
     required this.active,
     required this.company,
+    this.description,
     required this.position,
     required this.startDate,
     required this.endDate,
     required this.skills,
   });
 
-  Professional copyWith({
-    bool? active,
-    String? company,
-    String? position,
-    String? startDate,
-    String? endDate,
-    List<String>? skills,
-  }) =>
-      Professional(
-        active: active ?? this.active,
-        company: company ?? this.company,
-        position: position ?? this.position,
-        startDate: startDate ?? this.startDate,
-        endDate: endDate ?? this.endDate,
-        skills: skills ?? this.skills,
+  factory ProfessionalExperience.fromJson(Map<String, dynamic> json) =>
+      ProfessionalExperience(
+        active: json['active'] as bool?,
+        company: json['company'] as String?,
+        description: json['description'] as String?,
+        position: json['position'] as String?,
+        startDate: json['startDate'] as String?,
+        endDate: json['endDate'] as String?,
+        skills: (json['skills'] as List<dynamic>).cast<String?>(),
       );
 }
 
-class JobInfo {
-  bool jobOffers;
-  String availability;
-  String cv;
+class Experience {
+  final List<ProfessionalExperience> professional;
+  final List<dynamic>
+      proyects; // Keep proyects dynamic as its structure might be unknown
+  final List<dynamic> certificates; // Similar to proyects
+  final List<dynamic> language; // Similar to proyects
 
-  JobInfo({
-    required this.jobOffers,
-    required this.availability,
-    required this.cv,
+  Experience({
+    required this.professional,
+    required this.proyects,
+    required this.certificates,
+    required this.language,
   });
 
-  JobInfo copyWith({
-    bool? jobOffers,
-    String? availability,
-    String? cv,
-  }) =>
-      JobInfo(
-        jobOffers: jobOffers ?? this.jobOffers,
-        availability: availability ?? this.availability,
-        cv: cv ?? this.cv,
+  factory Experience.fromJson(Map<String, dynamic> json) => Experience(
+        professional: (json['professional'] as List<dynamic>)
+            .cast<Map<String, dynamic>>()
+            .map((exp) => ProfessionalExperience.fromJson(exp))
+            .toList(),
+        proyects: json['proyects'] as List<dynamic>,
+        certificates: json['certificates'] as List<dynamic>,
+        language: json['language'] as List<dynamic>,
       );
 }
 
-class PersonalInfo {
-  String names;
-  String birthdate;
-  String civilStatus;
-  String gender;
-  String country;
-  String city;
-  String province;
-  String address;
+class User {
+  final PersonalInfo personalInfo;
+  final UserInfo userInfo;
+  final Education education;
+  final Experience experience;
+  final List<dynamic>
+      skills; // Keep skills dynamic as its structure might be unknown
 
-  PersonalInfo({
-    required this.names,
-    required this.birthdate,
-    required this.civilStatus,
-    required this.gender,
-    required this.country,
-    required this.city,
-    required this.province,
-    required this.address,
+  User({
+    required this.personalInfo,
+    required this.userInfo,
+    required this.education,
+    required this.experience,
+    required this.skills,
   });
 
-  PersonalInfo copyWith({
-    String? names,
-    String? birthdate,
-    String? civilStatus,
-    String? gender,
-    String? country,
-    String? city,
-    String? province,
-    String? address,
-  }) =>
-      PersonalInfo(
-        names: names ?? this.names,
-        birthdate: birthdate ?? this.birthdate,
-        civilStatus: civilStatus ?? this.civilStatus,
-        gender: gender ?? this.gender,
-        country: country ?? this.country,
-        city: city ?? this.city,
-        province: province ?? this.province,
-        address: address ?? this.address,
-      );
-}
-
-class UserInfo {
-  String email;
-  String password;
-  String description;
-
-  UserInfo({
-    required this.email,
-    required this.password,
-    required this.description,
-  });
-
-  UserInfo copyWith({
-    String? email,
-    String? password,
-    String? description,
-  }) =>
-      UserInfo(
-        email: email ?? this.email,
-        password: password ?? this.password,
-        description: description ?? this.description,
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        personalInfo: PersonalInfo.fromJson(json['personalInfo']),
+        userInfo: UserInfo.fromJson(json['userInfo']),
+        education: Education.fromJson(json['education']),
+        experience: Experience.fromJson(json['experience']),
+        skills: json['skills'] as List<dynamic>,
       );
 }

@@ -7,14 +7,8 @@ import 'package:job_match_app/config/theme/theme.dart';
 Future<void> main() async {
   // Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-      options: const FirebaseOptions(
-    apiKey: 'AIzaSyBES7yl9EZ5UIQ2Ubz_u0YKJuJ_ZljKgaw',
-    appId: 'com.example.job_match_app',
-    messagingSenderId: 'sendid',
-    projectId: 'jobmatchdb',
-    storageBucket: 'jobmatchdb.appspot.com',
-  ));
+  await Firebase.initializeApp();
+  await dotenv.load();
 
   runApp(
     const ProviderScope(
@@ -30,8 +24,19 @@ class MainApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = ref.watch(themeProvider);
     return MaterialApp.router(
-      theme:
-          theme.globalBrightnessisDark ? ThemeData.dark() : ThemeData.light(),
+      theme: ThemeData(
+        primarySwatch: Colors.amber,
+        brightness:
+            theme.globalBrightnessisDark ? Brightness.dark : Brightness.light,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        textTheme: const TextTheme(
+          labelLarge:
+              TextStyle(color: Colors.blue), // Change text color to blue
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       routerConfig: router,
     );

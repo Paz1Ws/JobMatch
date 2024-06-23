@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:job_match_app/infrastructure/provider/cv_recognizer.dart';
 import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
 import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/method_fill_information.dart';
 
@@ -38,7 +39,9 @@ class ProfilePageIndicator extends ConsumerWidget {
                       child: IconButton(
                           iconSize: 40,
                           icon: const Icon(Icons.arrow_back),
-                          onPressed: () => context.go('/JcWelcomeScreen')),
+                          onPressed: () => Navigator.of(context).popUntil(
+                              (route) =>
+                                  route.settings.name == '/JcWelcomeScreen')),
                     ),
                     const ThemeButton(),
                   ],
@@ -70,11 +73,11 @@ class ProfilePageIndicator extends ConsumerWidget {
                 ref.read(change_page).changePageMethod(index);
                 ref.read(change_page_valid).changePageValidMethod(false);
               },
-              children: const [
+              children: [
                 MethodsFillInformation(),
-                SignUpForm(),
-                PhotoSection(),
-                SignUpInterest(),
+                const SignUpForm(),
+                const PhotoSection(),
+                const SignUpInterest(),
               ],
             ),
           ],

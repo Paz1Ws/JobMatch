@@ -2,14 +2,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final formKeyProvider = Provider((ref) => GlobalKey<FormState>());
-
-final firestoreProvider = Provider((ref) => FirebaseFirestore.instance);
-
+//Importants
+final informationFilledProvider = Provider((ref) => false);
+// final usersAlreadyRegistered = Provider((ref) {
+//   final firestore = ref.watch(firestoreProvider);
+//   return firestore.collection('user');
+// });
 final candidateCollectionProvider = Provider((ref) {
   final firestore = ref.watch(firestoreProvider);
   return firestore.collection('candidates');
 });
+
+final formKeyProvider = Provider((ref) => GlobalKey<FormState>());
+final firestoreProvider = Provider((ref) => FirebaseFirestore.instance);
 
 final nameControllerProvider = Provider((ref) => TextEditingController());
 
@@ -34,6 +39,7 @@ final enterpriseCollectionProvider = Provider((ref) {
   final firestore = ref.watch(firestoreProvider);
   return firestore.collection('enterprises');
 });
+
 var typeJobProvider = Provider((ref) => '');
 final mainActivityProvider = Provider((ref) => TextEditingController());
 final legalRepresentativeProvider = Provider((ref) => TextEditingController());
@@ -41,6 +47,9 @@ final socialReasonProvider = Provider((ref) => TextEditingController());
 var isButtonEnabledProvider = Provider((ref) => false);
 
 class SignUpFormVariables {
+  // ValidationOfInformation
+  bool informationFilledProvider;
+  // For users
   final GlobalKey<FormState> formKey;
   final FirebaseFirestore firestore;
   final CollectionReference candidateCollection;
@@ -63,6 +72,9 @@ class SignUpFormVariables {
   String typeJob;
 
   SignUpFormVariables({
+    // ValidationOfInformation
+    required this.informationFilledProvider,
+    // For users
     required this.phoneNumberController,
     required this.formKey,
     required this.firestore,
@@ -85,6 +97,8 @@ class SignUpFormVariables {
 }
 
 final signUpFormVariablesProvider = Provider((ref) {
+  // ValidationOfInformation
+  final informationFilled = ref.watch(informationFilledProvider);
   // For users
   final formKey = ref.watch(formKeyProvider);
   final firestore = ref.watch(firestoreProvider);
@@ -108,6 +122,9 @@ final signUpFormVariablesProvider = Provider((ref) {
   final socialReasonController = ref.watch(socialReasonProvider);
 
   return SignUpFormVariables(
+    // ValidationOfInformation
+    informationFilledProvider: informationFilled,
+    // For users
     phoneNumberController: phoneNumberController,
     formKey: formKey,
     firestore: firestore,

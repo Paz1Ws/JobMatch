@@ -1,15 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:job_match_app/presentation/screens/Home/UserViews/home_view_user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SignUpInterest extends StatefulWidget {
+class SignUpInterest extends ConsumerStatefulWidget {
   const SignUpInterest({super.key});
 
   @override
   _SignUpInterestState createState() => _SignUpInterestState();
 }
 
-class _SignUpInterestState extends State<SignUpInterest>
+class _SignUpInterestState extends ConsumerState<SignUpInterest>
     with AutomaticKeepAliveClientMixin<SignUpInterest> {
   @override
   bool get wantKeepAlive => true;
@@ -162,8 +166,21 @@ class _SignUpInterestState extends State<SignUpInterest>
                         vertical: 16, horizontal: 16), // Add vertical padding
                   ),
                   onPressed: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) => const UserScreen()));
+                    try {
+                      context.go('/user_home_true');
+                      final user = FirebaseAuth.instance.currentUser;
+
+                      final firestoreProvider =
+                          Provider((ref) => FirebaseFirestore.instance);
+
+                      final firestore = ref.watch(firestoreProvider);
+                      firestore.collection('users_registered').add({
+                        'email': user?.email,
+                        'interests': _selectedIndexList,
+                      });
+                    } catch (e) {
+                      print(e);
+                    }
                   },
                   child: Text("Let's begin your journey!",
                       style: TextStyle(

@@ -162,9 +162,7 @@ class _SignUpInterestCompaniesState extends State<SignUpInterestCompanies>
                     padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 16), // Add vertical padding
                   ),
-                  onPressed: () {
-                    context.go('/company_home');
-                  },
+                  onPressed: () {},
                   child: Text("Let's begin your journey!",
                       style: TextStyle(
                           fontSize: 20,

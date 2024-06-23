@@ -1,3 +1,3 @@
-//place your api key
-
-const String apikey = 'AIzaSyBffHcb_Wtb1GMqO8DeLeznpinWfJeETYs';
+import 'package:dotenv/dotenv.dart';
+dotenv.load();
+const String apikey = dotenv.env['GEMINI_API_KEY'];

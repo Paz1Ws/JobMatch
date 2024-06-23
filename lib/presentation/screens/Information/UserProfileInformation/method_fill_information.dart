@@ -1,11 +1,18 @@
 // ignore_for_file: unrelated_type_equality_checks
 
+import 'dart:async';
+
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:job_match_app/domain/models/user_model.dart';
+import 'package:job_match_app/infrastructure/provider/cv_recognizer.dart';
 import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
+import 'package:job_match_app/infrastructure/provider/cv_recognizer.dart';
 
 class MethodsFillInformation extends ConsumerStatefulWidget {
   const MethodsFillInformation({super.key});
@@ -18,6 +25,8 @@ class _MethodsFillInformationState
     extends ConsumerState<MethodsFillInformation> {
   @override
   Widget build(BuildContext context) {
+    var user = ref.watch(userProvider);
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -41,8 +50,16 @@ class _MethodsFillInformationState
             ),
             const SizedBox(height: 20),
             GestureDetector(
-              onTap: () {
-                // Handle rectangle 1 click
+              onTap: () async {
+                final result = await FilePicker.platform.pickFiles(
+                  allowMultiple: false, // Only allow one file
+                  type: FileType.any, // Allow PDF and DOCX
+                );
+
+                if (result != null) {
+                  final filePath = result.files.single.path;
+                  await CVRecognizer().recognizeCV(filePath!, ref);
+                }
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
@@ -119,12 +136,14 @@ class _MethodsFillInformationState
             Padding(
               padding: const EdgeInsets.only(left: 200),
               child: ElevatedButton.icon(
-                icon: const Icon(
-                  FontAwesomeIcons.pen,
+                icon: Icon(
+                  user == null ? FontAwesomeIcons.pen : Icons.person,
                   color: Colors.amber,
                 ),
                 label: Text(
-                  'Fill by typing',
+                  user == null
+                      ? 'Fill by typing'
+                      : 'Welcome ${user.personalInfo.names}',
                   style: TextStyle(
                     color: Theme.of(context).brightness == Brightness.dark
                         ? Colors.white
@@ -134,7 +153,9 @@ class _MethodsFillInformationState
                   ),
                 ),
                 onPressed: () {
-                  ref.read(change_page_valid).changePageValidMethod(true);
+                  user == null
+                      ? ref.read(change_page_valid).changePageValidMethod(true)
+                      : context.go('/user_home_true');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,
@@ -145,11 +166,12 @@ class _MethodsFillInformationState
               ),
             ),
             Visibility(
-              visible: ref.watch(change_page_valid).changepageValid,
+              visible:
+                  ref.watch(change_page_valid).changepageValid && user == null,
               child: Padding(
                 padding: const EdgeInsets.only(left: 220),
                 child: Text(
-                  'Only Swipe ->',
+                  'Swipe to continue',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

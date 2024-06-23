@@ -10,13 +10,25 @@ import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForEnte
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/RegisterScreens.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/settings_profile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../presentation/widgets/HomePage/Chat/common_chat.dart';
 
+import 'package:animate_do/animate_do.dart';
+
 final user = FirebaseAuth.instance.currentUser;
 
+final firestore = FirebaseFirestore.instance.collection('users_registered');
+alreadyRegistered() {
+  if (firestore.doc(user!.uid).get().then((value) => value.exists) == true) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 _checkLogin(BuildContext context) {
-  if (user != null) {
+  if (user != null && alreadyRegistered == true) {
     return '/user_home';
   } else {
     return '/fill_information';
@@ -32,7 +44,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/JcWelcomeScreen',
-      builder: (context, state) => const JcWelcomeScreen(),
+      builder: (context, state) => FadeIn(child: const JcWelcomeScreen()),
     ),
     GoRoute(
       path: '/userlogin',
@@ -45,7 +57,17 @@ final GoRouter router = GoRouter(
       redirect: (context, state) => _checkLogin(context),
     ),
     GoRoute(
-        path: '/user_home', builder: (context, state) => const UserScreen()),
+      path: '/user_home',
+      builder: (context, state) => FadeIn(
+        child: alreadyRegistered() == true
+            ? const UserScreen()
+            : const ProfilePageIndicator(),
+      ),
+    ),
+    GoRoute(
+      path: '/user_home_true',
+      builder: (context, state) => FadeIn(child: const UserScreen()),
+    ),
     GoRoute(
         path: '/company_home',
         builder: (context, state) => const CompanyScreen()),
