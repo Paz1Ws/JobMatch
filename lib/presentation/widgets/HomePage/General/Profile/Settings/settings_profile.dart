@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:job_match_app/config/theme/theme.dart';
+import 'package:job_match_app/infrastructure/provider/screen_index_provider.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/edit_screen.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/forward_button.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/setting_item.dart';
@@ -167,6 +169,17 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                 bgColor: Colors.purple.shade100,
                 iconColor: Colors.purple,
                 onTap: () {},
+              ),
+              const SizedBox(height: 20),
+              SettingItem(
+                title: "Log Out",
+                icon: Ionicons.log_out,
+                bgColor: Colors.red.shade100,
+                iconColor: Colors.red,
+                onTap: () {
+                  ref.watch(counterProvider.notifier).update((state) => 0);
+                  context.go('/JcWelcomeScreen');
+                },
               ),
             ],
           ),

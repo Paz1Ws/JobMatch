@@ -120,9 +120,16 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
                     Container(
                       width: 60,
                       height: 60,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: ColorConstants.kWhite,
+                        boxShadow: [
+                          BoxShadow(
+                            color: ColorConstants.kGrey.withOpacity(0.1),
+                            spreadRadius: 10,
+                            blurRadius: 15,
+                          ),
+                        ],
                       ),
                       child: IconButton(
                         onPressed: () {
@@ -145,7 +152,7 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
                     Text(
                       "SETTINGS",
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: ColorConstants.kGrey.withOpacity(0.8),
                       ),
@@ -217,13 +224,10 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
                           ],
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
                       Text(
-                        "ADD MEDIA",
+                        "Add Photos",
                         style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 16,
                             fontWeight: FontWeight.w600,
                             color: ColorConstants.kGrey.withOpacity(0.8)),
                       )
@@ -243,23 +247,23 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
                             color: ColorConstants.kGrey.withOpacity(0.1),
                             spreadRadius: 10,
                             blurRadius: 15,
-                            // changes position of shadow
                           ),
                         ],
                       ),
                       child: Icon(
-                        Icons.edit,
+                        Icons.book,
                         size: 35,
-                        color: ColorConstants.kGrey.withOpacity(0.5),
+                        color: const Color.fromARGB(255, 23, 204, 51)
+                            .withOpacity(0.5),
                       ),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Text(
-                      "EDIT INFO",
+                      "Learning",
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: ColorConstants.kGrey.withOpacity(0.8),
                       ),

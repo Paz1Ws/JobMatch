@@ -24,7 +24,7 @@ class _ScreenLoaderState extends State<ScreenLoader> {
         setState(() {});
       });
 
-    Timer(const Duration(milliseconds: 2900), () {
+    Timer(const Duration(milliseconds: 2700), () {
       if (widget.userData != true) {
         context.go('/JcWelcomeScreen');
       } else {

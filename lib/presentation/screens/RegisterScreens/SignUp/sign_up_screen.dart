@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/main_profile_information.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
 import 'package:job_match_app/presentation/screens/Home/UserViews/home_view_user.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/login_button.dart';
@@ -29,7 +30,6 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   void signupUser() async {
-    // set is loading to true.
     setState(() {
       isLoading = true;
     });
@@ -46,7 +46,7 @@ class _SignupScreenState extends State<SignupScreen> {
       //navigate to the next screen
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const UserScreen(),
+          builder: (context) => const ProfilePageIndicator(),
         ),
       );
     } else {

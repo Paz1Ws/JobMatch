@@ -11,12 +11,15 @@ import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUser
 import 'package:job_match_app/presentation/screens/RegisterScreens/RegisterScreens.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/settings_profile.dart';
 
+import '../../presentation/widgets/HomePage/Chat/common_chat.dart';
+
 final user = FirebaseAuth.instance.currentUser;
+
 _checkLogin(BuildContext context) {
-  if (user == null) {
-    return '/JcWelcomeScreen';
-  } else {
+  if (user != null) {
     return '/user_home';
+  } else {
+    return '/fill_information';
   }
 }
 
@@ -42,20 +45,17 @@ final GoRouter router = GoRouter(
       redirect: (context, state) => _checkLogin(context),
     ),
     GoRoute(
-      path: '/user_home',
-      builder: (context, state) =>
-          user != null ? const UserScreen() : const ProfilePageIndicator(),
-      redirect: (context, state) => _checkLogin(context),
-    ),
+        path: '/user_home', builder: (context, state) => const UserScreen()),
     GoRoute(
-      path: '/company_home',
-      builder: (context, state) =>
-          user != null ? const CompanyScreen() : const ProfilePageIndicator(),
-      redirect: (context, state) => _checkLogin(context),
-    ),
+        path: '/company_home',
+        builder: (context, state) => const CompanyScreen()),
     GoRoute(
       path: '/user_profile_information',
       builder: (context, state) => const AccountScreen(),
-    )
+    ),
+    GoRoute(path: '/chat', builder: (context, state) => const MainChatScreen()),
+    GoRoute(
+        path: '/fill_information',
+        builder: (context, state) => const ProfilePageIndicator())
   ],
 );

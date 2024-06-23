@@ -7,8 +7,9 @@ import 'package:job_match_app/infrastructure/provider/screen_index_provider.dart
 // ignore: must_be_immutable
 class BottomNavigator extends ConsumerStatefulWidget {
   bool isEnterprise;
-
+  int index;
   BottomNavigator({
+    this.index = 0,
     required this.isEnterprise,
     super.key,
   });
@@ -19,9 +20,7 @@ class BottomNavigator extends ConsumerStatefulWidget {
 }
 
 class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
-  int _selectedIndex = 0;
   final Color _unselectedColor = Colors.grey;
-
   @override
   Widget build(BuildContext context) {
     final brightness = Theme.of(context).brightness;
@@ -36,12 +35,7 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
           tabBorderRadius: 20,
           backgroundColor: Colors.grey.withOpacity(0.1),
           gap: 5,
-          selectedIndex: _selectedIndex,
-          onTabChange: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
+          selectedIndex: ref.watch(counterProvider),
           tabs: [
             GButton(
               onPressed: () {
@@ -66,8 +60,9 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
               textColor: textColor,
               iconSize: 24,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              iconActiveColor:
-                  _selectedIndex == 0 ? _unselectedColor : Colors.black,
+              iconActiveColor: ref.watch(counterProvider) == 0
+                  ? _unselectedColor
+                  : Colors.black,
               backgroundColor: Colors.deepOrange,
             ),
             GButton(
@@ -81,8 +76,9 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
               textColor: textColor,
               iconSize: 22,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              iconActiveColor:
-                  _selectedIndex == 0 ? _unselectedColor : Colors.black,
+              iconActiveColor: ref.watch(counterProvider) == 0
+                  ? _unselectedColor
+                  : Colors.black,
               backgroundColor: Colors.deepOrange,
             ),
             GButton(
@@ -95,8 +91,9 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
               textColor: textColor,
               iconSize: 24,
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              iconActiveColor:
-                  _selectedIndex == 0 ? _unselectedColor : Colors.black,
+              iconActiveColor: ref.watch(counterProvider) == 0
+                  ? _unselectedColor
+                  : Colors.black,
               backgroundColor: Colors.deepOrange,
             ),
             GButton(

@@ -7,7 +7,7 @@ class ThemeButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = ref.watch(themeProvider);
+     final theme = ref.watch(themeProvider);
     return IconButton(
       iconSize: 30,
       onPressed: () {
