@@ -156,14 +156,6 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "Notifications",
-                icon: Ionicons.notifications,
-                bgColor: Colors.blue.shade100,
-                iconColor: Colors.blue,
-                onTap: () {},
-              ),
-              const SizedBox(height: 20),
-              SettingItem(
                 title: "About",
                 icon: Ionicons.information_circle,
                 bgColor: Colors.purple.shade100,

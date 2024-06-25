@@ -1,6 +1,6 @@
 {
-    "name": "job_match_app",
-    "short_name": "job_match_app",
+    "name": "lib",
+    "short_name": "lib",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

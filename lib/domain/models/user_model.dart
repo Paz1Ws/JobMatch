@@ -118,7 +118,9 @@ class Experience {
             .map((exp) => ProfessionalExperience.fromJson(exp))
             .toList(),
         proyects: json['proyects'] as List<dynamic>,
-        certificates: json['certificates'] as List<dynamic>,
+        certificates: (json['certificates'] as List<dynamic>)
+            .map((cert) => cert['names'])
+            .toList(),
         language: json['language'] as List<dynamic>,
       );
 }

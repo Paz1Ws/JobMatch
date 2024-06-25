@@ -17,7 +17,6 @@ class _SignUpInterestState extends ConsumerState<SignUpInterest>
     with AutomaticKeepAliveClientMixin<SignUpInterest> {
   @override
   bool get wantKeepAlive => true;
-
   final List<String> _selectedIndexList = [];
   final List<String> _options = [
     'Software Development',
@@ -73,7 +72,6 @@ class _SignUpInterestState extends ConsumerState<SignUpInterest>
       children: chips,
     );
   }
-
   @override
   Widget build(BuildContext context) {
     super.build(context);

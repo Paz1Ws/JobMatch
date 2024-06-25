@@ -35,14 +35,12 @@ class ProfilePageIndicator extends ConsumerWidget {
                   actions: [
                     const SizedBox(height: 20),
                     Padding(
-                      padding: const EdgeInsets.only(right: 300),
-                      child: IconButton(
+                        padding: const EdgeInsets.only(right: 300),
+                        child: IconButton(
                           iconSize: 40,
                           icon: const Icon(Icons.arrow_back),
-                          onPressed: () => Navigator.of(context).popUntil(
-                              (route) =>
-                                  route.settings.name == '/JcWelcomeScreen')),
-                    ),
+                          onPressed: () => context.go('/JcWelcomeScreen'),
+                        )),
                     const ThemeButton(),
                   ],
                 ),
@@ -73,11 +71,11 @@ class ProfilePageIndicator extends ConsumerWidget {
                 ref.read(change_page).changePageMethod(index);
                 ref.read(change_page_valid).changePageValidMethod(false);
               },
-              children: [
+              children: const [
                 MethodsFillInformation(),
-                const SignUpForm(),
-                const PhotoSection(),
-                const SignUpInterest(),
+                SignUpForm(),
+                PhotoSection(),
+                SignUpInterest(),
               ],
             ),
           ],

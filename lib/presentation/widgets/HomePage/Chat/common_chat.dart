@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:job_match_app/domain/models/chats/chat_model.dart';
 import 'package:job_match_app/domain/models/chats/message_model.dart';
+import 'package:job_match_app/presentation/screens/Home/UserViews/home_view_user.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/Chat/chat_screen.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/Chat/user_model.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/theme_button.dart';
@@ -234,7 +235,9 @@ class _CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios_rounded),
         onPressed: () {
-          context.go('/user_home');
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const UserScreen(),
+          ));
         },
       ),
       title: Text(

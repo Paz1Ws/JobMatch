@@ -4,6 +4,8 @@ import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForEnte
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForUsers/users_login.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/theme_button.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:job_match_app/infrastructure/services/Notifications/firebase_api.dart';
+
 
 class JcWelcomeScreen extends StatelessWidget {
   const JcWelcomeScreen({super.key});
@@ -80,6 +82,7 @@ class JcWelcomeScreen extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
+                        FirebaseApi().initNotification();
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const LoginScreen(),
                         ));

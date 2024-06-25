@@ -1,30 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:job_match_app/domain/models/chats/message_model.dart';
+import 'package:job_match_app/infrastructure/provider/cv_recognizer.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/pick_image.dart';
+import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/list_interest.dart';
 
-class EditAccountScreen extends StatefulWidget {
+class EditAccountScreen extends ConsumerStatefulWidget {
   const EditAccountScreen({super.key});
 
   @override
-  State<EditAccountScreen> createState() => _EditAccountScreenState();
+  ConsumerState<EditAccountScreen> createState() => _EditAccountScreenState();
 }
 
-class _EditAccountScreenState extends State<EditAccountScreen> {
+class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
   final List<String> _selectedIndexList = [];
-
-  final List<String> _options = [
-    'Software Development',
-    'Data Science',
-    'Product Management',
-    'UI/UX Design',
-    'Digital Marketing',
-    'Sales',
-    'Human Resources',
-    'Finance'
-  ];
 
   Widget _buildChips() {
     return Wrap(
@@ -61,6 +51,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var user = ref.watch(userProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Edit Profile'),
@@ -72,9 +63,11 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       LinearProgressIndicator(
-                        value: 0.45,
+                        value:
+                            0.75, // Add appropriate value for progress indicator
                         backgroundColor: Colors.grey[200],
-                        valueColor: const AlwaysStoppedAnimation(Colors.blue),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                            Color.fromARGB(255, 222, 127, 19)),
                       ),
                       const SizedBox(height: 16.0),
                       const Text(
@@ -133,15 +126,18 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           style: TextStyle(
                               fontSize: 32.0, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8.0),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Share a few words about yourself...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                        maxLines: 3,
-                      ),
+                      user?.userInfo.description == null
+                          ? TextField(
+                              decoration: InputDecoration(
+                                hintText: 'Share a few words about yourself...',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ),
+                              maxLines: 3,
+                            )
+                          : Text(user!.userInfo.description ?? ''),
+
                       const SizedBox(height: 16.0),
                       Wrap(
                         spacing: 8.0,
@@ -180,7 +176,36 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           TextButton(
                             onPressed:
                                 () {}, // Add functionality here (e.g., edit location)
-                            child: const Text('Name'),
+                            child: Text(user?.personalInfo.names ?? 'Name'),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                              Icons.cake), // Add appropriate icon for name
+                          const SizedBox(width: 10),
+                          const Text('Birthdate:'),
+                          const Spacer(),
+                          TextButton(
+                            onPressed:
+                                () {}, // Add functionality here (e.g., edit location)
+                            child: Text(
+                                user?.personalInfo.birthdate ?? 'Birthdate'),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Icon(
+                              Icons.cake), // Add appropriate icon for name
+                          const SizedBox(width: 10),
+                          const Text('Adress:'),
+                          const Spacer(),
+                          TextButton(
+                            onPressed:
+                                () {}, // Add functionality here (e.g., edit location)
+                            child: Text(user?.personalInfo.address ?? 'Adress'),
                           ),
                         ],
                       ),
@@ -192,8 +217,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           const Text('Phone:'),
                           const Spacer(),
                           TextButton(
-                            onPressed:
-                                () {}, // Add functionality here (e.g., edit location)
+                            onPressed: () {
+                              // Add functionality here (e.g., edit phone number)
+                            },
                             child: const Text(
                                 'Phone'), // Handle case where phone number might be null
                           ),
@@ -210,6 +236,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                             onPressed:
                                 () {}, // Add functionality here (e.g., edit location)
                             child: const Text(
+                                //user?.personalInfo.address ??
                                 'Email'), // Handle case where email might be null
                           ),
                         ],
@@ -230,7 +257,10 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           const Spacer(),
                           TextButton(
                             onPressed: () {},
-                            child: const Text('Add >'),
+                            child: Text(
+                              user?.experience.professional.last.position ??
+                                  'Occupation',
+                            ),
                           ),
                         ],
                       ),
@@ -239,12 +269,15 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           const Icon(Ionicons
                               .briefcase), // Add appropriate icon for experience
                           const SizedBox(width: 10),
-                          const Text('Experience:'),
+                          const Text('Place of work'),
                           const Spacer(),
                           TextButton(
                             onPressed:
                                 () {}, // Add functionality here (e.g., edit location)
-                            child: const Text('Experience'),
+                            child: Text(
+                              user?.experience.professional.last.company ??
+                                  'Place of work',
+                            ),
                           ),
                         ],
                       ),
@@ -265,12 +298,73 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           TextButton(
                             onPressed:
                                 () {}, // Add functionality here (e.g., edit location)
-                            child: const Text('Education'),
+                            child: Text(user?.education.status ?? 'Education'),
                           ),
                         ],
                       ),
                       const SizedBox(height: 8.0),
-
+                      Row(
+                        children: [
+                          const Icon(Icons
+                              .school), // Add appropriate icon for education
+                          const SizedBox(width: 10),
+                          const Text('Place of study'),
+                          const SizedBox(width: 80),
+                          Expanded(
+                            child: TextButton(
+                              onPressed:
+                                  () {}, // Add functionality here (e.g., edit location)
+                              child: Text(
+                                user?.education.studyCenter ?? 'Place of study',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8.0),
+                      Row(
+                        children: [
+                          const Icon(Icons
+                              .school), // Add appropriate icon for education
+                          const SizedBox(width: 10),
+                          const Text('Career:'),
+                          const Spacer(),
+                          TextButton(
+                            onPressed:
+                                () {}, // Add functionality here (e.g., edit location)
+                            child: Text(user?.education.yield ??
+                                'Career'), // Handle case where career might be null
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8.0),
+                      Row(
+                        children: [
+                          const Icon(Icons
+                              .school), // Add appropriate icon for education
+                          const SizedBox(width: 10),
+                          const Text('Certificates:'),
+                          const Spacer(
+                            flex: 2,
+                          ),
+                          Expanded(
+                            child: TextButton(
+                              onPressed:
+                                  () {}, // Add functionality here (e.g., edit location)
+                              child: Text(
+                                user?.experience.certificates.length
+                                        .toString() ??
+                                    'Certificates',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                              ), // Handle case where career might be null
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8.0),
                       // Skills section
 
                       Row(
@@ -279,11 +373,19 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                               Icons.work), // Add appropriate icon for skills
                           const SizedBox(width: 10),
                           const Text('Skills:'),
-                          const Spacer(),
-                          TextButton(
-                            onPressed:
-                                () {}, // Add functionality here (e.g., edit location)
-                            child: const Text('Skills'),
+                          const SizedBox(width: 40),
+                          Expanded(
+                            child: TextButton(
+                              onPressed:
+                                  () {}, // Add functionality here (e.g., edit location)
+                              child: Text(
+                                user?.skills.toString().substring(
+                                        1, user.skills.toString().length - 1) ??
+                                    'Skills',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 4,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -304,7 +406,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           TextButton(
                             onPressed:
                                 () {}, // Add functionality here (e.g., edit location)
-                            child: const Text('Languages'),
+                            child: const Text('Spanish, English'),
                           ),
                         ],
                       ),
@@ -318,7 +420,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                           TextButton(
                             onPressed:
                                 () {}, // Add functionality here (e.g., edit location)
-                            child: const Text('Location'),
+                            child: Text(
+                              '${user!.personalInfo.country}, ${user.personalInfo.city}',
+                            ),
                           ),
                         ],
                       ),
@@ -326,3 +430,35 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                     ]))));
   }
 }
+
+final List<String> _options = [
+  "SEO Specialist",
+  "Content Marketing Specialist",
+  "Sales Representative",
+  "Account Executive",
+  "Business Development Manager",
+  "Software Engineer",
+  "Web Developer",
+  "Mobile Developer",
+  "Machine Learning Engineer",
+  "Product Manager",
+  "Product Owner",
+  "Desing",
+  "Interaction Designer",
+  "Digital Marketing Specialist",
+  "HR Generalist",
+  "Recruiting Specialist",
+  "Training and Development Manager",
+  "Financial Analyst",
+  "Accountant",
+  "Auditor",
+  "Teacher",
+  "Professor",
+  "Educational Technologist",
+  "Doctor",
+  "Nurse",
+  "Therapist",
+  "Musician", // Added "Musician" as a non-profession interest
+  "Artist", // Added "Artist" as a non-profession interest
+  // Add more roles or interests as needed
+];

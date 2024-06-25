@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_match_app/config/router/go_router.dart';
 import 'package:job_match_app/config/theme/theme.dart';
-
+import 'package:job_match_app/infrastructure/services/Notifications/firebase_api.dart';
+import 'package:job_match_app/infrastructure/services/firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 Future<void> main() async {
   // Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await dotenv.load();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  await FirebaseApi().initNotification();
 
   runApp(
     const ProviderScope(

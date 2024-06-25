@@ -15,16 +15,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../presentation/widgets/HomePage/Chat/common_chat.dart';
 
 import 'package:animate_do/animate_do.dart';
-
+bool alreadyRegistered = false;
 final user = FirebaseAuth.instance.currentUser;
-
-final firestore = FirebaseFirestore.instance.collection('users_registered');
-alreadyRegistered() {
-  if (firestore.doc(user!.uid).get().then((value) => value.exists) == true) {
-    return true;
-  } else {
-    return false;
+final firestore = FirebaseFirestore.instance;
+final userEmail = user?.email ?? '';
+final CollectionReference usersRef = firestore.collection('users_registered');
+final Query userQuery = usersRef.where('email', isEqualTo: userEmail);
+ 
+Future<bool> alreadyRegisteredF() async {
+  final QuerySnapshot userQuerySnapshot = await userQuery.get();
+  if (userQuerySnapshot.docs.isNotEmpty) {
+    alreadyRegistered = true;
   }
+  return alreadyRegistered;
 }
 
 _checkLogin(BuildContext context) {
@@ -59,7 +62,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/user_home',
       builder: (context, state) => FadeIn(
-        child: alreadyRegistered() == true
+        child: alreadyRegistered == true
             ? const UserScreen()
             : const ProfilePageIndicator(),
       ),

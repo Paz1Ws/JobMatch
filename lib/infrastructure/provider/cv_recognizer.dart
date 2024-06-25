@@ -1,14 +1,20 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:job_match_app/domain/models/user_model.dart';
 
 final userProvider = StateProvider<User?>((ref) => null);
 
+final loadingCV = StateProvider<bool>((ref) => false);
+
 class CVRecognizer {
   final Dio _dio = Dio();
+  void updateIsUpdated(WidgetRef ref, newValue) {
+    ref.read(loadingCV.notifier).state = newValue;
+  }
 
   Future<String> recognizeCV(String filePath, WidgetRef ref) async {
     try {
@@ -27,6 +33,7 @@ class CVRecognizer {
 
         User user = User.fromJson(data);
         setUser(ref, user);
+        updateIsUpdated(ref, false);
         return "Información cargada exitosamente";
       } else {
         throw Exception('Error en la solicitud');
