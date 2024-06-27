@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:job_match_app/config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/main_profile_information.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/settings_profile.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/theme_button.dart';
@@ -94,7 +95,7 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
             ),
             Text(
-              "Entrepreneur of the year",
+              '${AppLocalizations.of(context)?.emprendedorDelAno}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 25,
@@ -150,7 +151,7 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
                       height: 10,
                     ),
                     Text(
-                      "SETTINGS",
+                      '${AppLocalizations.of(context)?.ajustes}',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w600,
@@ -225,7 +226,7 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
                         ),
                       ),
                       Text(
-                        "Add Photos",
+                        '${AppLocalizations.of(context)?.agregarFotos}',
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -261,7 +262,7 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
                       height: 10,
                     ),
                     Text(
-                      "Learning",
+                      '${AppLocalizations.of(context)?.aprendizaje}',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -292,7 +293,7 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
                     onPressed: () {},
                   ),
                   Text(
-                    "Client Assistance ",
+                    '${AppLocalizations.of(context)?.asistenciaAlCliente}',
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.w600,
@@ -320,10 +321,11 @@ class _MainProfileScreenState extends State<MainProfileScreen> {
               const SizedBox(
                 width: 10,
               ),
-              const Text(
-                "All the rights reserved to JobMatch 2024",
+              Text(
+                '${AppLocalizations.of(context)?.todosLosDerechosReservadosAJobMatch2024}',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                style:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
             ],
           ),

@@ -6,6 +6,8 @@ import 'package:job_match_app/infrastructure/provider/cv_recognizer.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/pick_image.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/list_interest.dart';
 
+import '../../../../../../config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
+
 class EditAccountScreen extends ConsumerStatefulWidget {
   const EditAccountScreen({super.key});
 
@@ -54,7 +56,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
     var user = ref.watch(userProvider);
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Edit Profile'),
+          title: Text(
+            '${AppLocalizations.of(context)?.editarPerfil}',
+          ),
         ),
         body: SingleChildScrollView(
             child: Padding(
@@ -70,9 +74,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                             Color.fromARGB(255, 222, 127, 19)),
                       ),
                       const SizedBox(height: 16.0),
-                      const Text(
-                        'Photos',
-                        style: TextStyle(
+                      Text(
+                        '${AppLocalizations.of(context)?.fotos}',
+                        style: const TextStyle(
                             fontSize: 32.0, fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 8.0),
@@ -82,6 +86,7 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           // Main photo section (medium-large)
                           Expanded(
                             child: PickImageWidget(
+                              image: true,
                               height: MediaQuery.of(context).size.height *
                                   0.5, // Adjust height as needed
                               width: MediaQuery.of(context).size.width / 1.5,
@@ -96,6 +101,7 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                                 height: 20,
                               ),
                               PickImageWidget(
+                                image: false,
                                 height:
                                     MediaQuery.of(context).size.height * 0.14,
                                 width: MediaQuery.of(context).size.width / 4,
@@ -103,6 +109,7 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                               ),
                               const SizedBox(height: 8.0),
                               PickImageWidget(
+                                image: false,
                                 height: MediaQuery.of(context).size.height *
                                     0.15, // Adjust height as needed
                                 width: MediaQuery.of(context).size.width / 4,
@@ -110,6 +117,7 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                               ),
                               const SizedBox(height: 8.0),
                               PickImageWidget(
+                                image: false,
                                 height: MediaQuery.of(context).size.height *
                                     0.15, // Adjust height as needed
                                 width: MediaQuery.of(context).size.width / 4,
@@ -122,8 +130,8 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                       const SizedBox(height: 16.0),
 
                       // About me section
-                      const Text('About me',
-                          style: TextStyle(
+                      Text('${AppLocalizations.of(context)?.acercaDeMi}',
+                          style: const TextStyle(
                               fontSize: 32.0, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8.0),
                       user?.userInfo.description == null
@@ -143,9 +151,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                         spacing: 8.0,
                         runSpacing: 8.0,
                         children: [
-                          const Text(
-                            'My interests',
-                            style: TextStyle(
+                          Text(
+                            '${AppLocalizations.of(context)?.misIntereses}',
+                            style: const TextStyle(
                                 fontSize: 32.0, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
@@ -157,13 +165,14 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                       const SizedBox(height: 8.0),
 
                       // My details section
-                      const Text('My details',
-                          style: TextStyle(
+                      Text('${AppLocalizations.of(context)?.misDatos}',
+                          style: const TextStyle(
                               fontSize: 32.0, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8.0),
                       // Personal Information section
-                      const Text('Personal Information',
-                          style: TextStyle(
+                      Text(
+                          '${AppLocalizations.of(context)?.informacionPersonal}',
+                          style: const TextStyle(
                               fontSize: 24.0, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8.0),
                       Row(
@@ -171,7 +180,7 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(
                               Icons.person), // Add appropriate icon for name
                           const SizedBox(width: 10),
-                          const Text('Name:'),
+                          Text('${AppLocalizations.of(context)?.nombre}'),
                           const Spacer(),
                           TextButton(
                             onPressed:
@@ -185,7 +194,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(
                               Icons.cake), // Add appropriate icon for name
                           const SizedBox(width: 10),
-                          const Text('Birthdate:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.fechaDeNacimiento}',
+                          ),
                           const Spacer(),
                           TextButton(
                             onPressed:
@@ -200,7 +211,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(
                               Icons.cake), // Add appropriate icon for name
                           const SizedBox(width: 10),
-                          const Text('Adress:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.direccion}',
+                          ),
                           const Spacer(),
                           TextButton(
                             onPressed:
@@ -214,14 +227,16 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(
                               Icons.phone), // Add appropriate icon for phone
                           const SizedBox(width: 10),
-                          const Text('Phone:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.telefono}',
+                          ),
                           const Spacer(),
                           TextButton(
                             onPressed: () {
                               // Add functionality here (e.g., edit phone number)
                             },
                             child: const Text(
-                                'Phone'), // Handle case where phone number might be null
+                                'Teléfono'), // Handle case where phone number might be null
                           ),
                         ],
                       ),
@@ -230,7 +245,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(
                               Icons.email), // Add appropriate icon for email
                           const SizedBox(width: 10),
-                          const Text('Email:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.correoElectronico}',
+                          ),
                           const Spacer(),
                           TextButton(
                             onPressed:
@@ -244,7 +261,7 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                       const SizedBox(height: 16.0),
 
                       // Work Experience section
-                      const Text('Work Experience',
+                      const Text('Experiencia',
                           style: TextStyle(
                               fontSize: 24.0, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8.0),
@@ -253,7 +270,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(Icons
                               .work), // Add appropriate icon for occupation
                           const SizedBox(width: 10),
-                          const Text('Occupation:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.ocupacion}',
+                          ),
                           const Spacer(),
                           TextButton(
                             onPressed: () {},
@@ -269,7 +288,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(Ionicons
                               .briefcase), // Add appropriate icon for experience
                           const SizedBox(width: 10),
-                          const Text('Place of work'),
+                          Text(
+                            '${AppLocalizations.of(context)?.lugarDeTrabajo}',
+                          ),
                           const Spacer(),
                           TextButton(
                             onPressed:
@@ -284,7 +305,7 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                       const SizedBox(height: 16.0),
 
                       // Education section
-                      const Text('Education',
+                      const Text('Educación',
                           style: TextStyle(
                               fontSize: 24.0, fontWeight: FontWeight.bold)),
 
@@ -293,7 +314,7 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(Icons
                               .school), // Add appropriate icon for education
                           const SizedBox(width: 10),
-                          const Text('Education:'),
+                          const Text('Educación:'),
                           const Spacer(),
                           TextButton(
                             onPressed:
@@ -308,7 +329,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(Icons
                               .school), // Add appropriate icon for education
                           const SizedBox(width: 10),
-                          const Text('Place of study'),
+                          Text(
+                            '${AppLocalizations.of(context)?.lugarDeEstudio}',
+                          ),
                           const SizedBox(width: 80),
                           Expanded(
                             child: TextButton(
@@ -329,7 +352,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(Icons
                               .school), // Add appropriate icon for education
                           const SizedBox(width: 10),
-                          const Text('Career:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.carrera}',
+                          ),
                           const Spacer(),
                           TextButton(
                             onPressed:
@@ -345,7 +370,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(Icons
                               .school), // Add appropriate icon for education
                           const SizedBox(width: 10),
-                          const Text('Certificates:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.certificados}',
+                          ),
                           const Spacer(
                             flex: 2,
                           ),
@@ -372,7 +399,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(
                               Icons.work), // Add appropriate icon for skills
                           const SizedBox(width: 10),
-                          const Text('Skills:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.habilidades}',
+                          ),
                           const SizedBox(width: 40),
                           Expanded(
                             child: TextButton(
@@ -392,8 +421,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                       const SizedBox(height: 16.0),
 
                       // Additional Information section
-                      const Text('Additional Information',
-                          style: TextStyle(
+                      Text(
+                          '${AppLocalizations.of(context)?.informacionAdicional}',
+                          style: const TextStyle(
                               fontSize: 32.0, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 8.0),
                       Row(
@@ -401,12 +431,14 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(Icons
                               .language), // Add appropriate icon for languages
                           const SizedBox(width: 10),
-                          const Text('Languages:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.idiomas}',
+                          ),
                           const Spacer(),
                           TextButton(
                             onPressed:
                                 () {}, // Add functionality here (e.g., edit location)
-                            child: const Text('Spanish, English'),
+                            child: const Text('Español, Inglés'),
                           ),
                         ],
                       ),
@@ -415,7 +447,9 @@ class _EditAccountScreenState extends ConsumerState<EditAccountScreen> {
                           const Icon(Icons
                               .location_pin), // Add appropriate icon for location
                           const SizedBox(width: 10),
-                          const Text('Location:'),
+                          Text(
+                            '${AppLocalizations.of(context)?.ubicacion}',
+                          ),
                           const Spacer(),
                           TextButton(
                             onPressed:

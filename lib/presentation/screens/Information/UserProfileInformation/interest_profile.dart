@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:job_match_app/presentation/screens/Home/UserViews/home_view_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SignUpInterest extends ConsumerStatefulWidget {
@@ -72,6 +71,7 @@ class _SignUpInterestState extends ConsumerState<SignUpInterest>
       children: chips,
     );
   }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);

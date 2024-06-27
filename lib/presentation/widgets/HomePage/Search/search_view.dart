@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:job_match_app/config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
 
 class SearchView extends StatelessWidget {
   final Map<String, String> popularProfiles = {
@@ -52,7 +53,7 @@ class SearchView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text("Discover your next job",
+                const Text('Descubre tu nuevo trabajo',
                     style:
                         TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
@@ -65,15 +66,16 @@ class SearchView extends StatelessWidget {
                         color: Colors.grey.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Row(children: [
-                        Padding(
+                      child: Row(children: [
+                        const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 10.0),
                           child: Icon(Icons.search),
                         ),
                         Expanded(
                           child: TextField(
                             decoration: InputDecoration(
-                              hintText: 'Search',
+                              hintText:
+                                  '${AppLocalizations.of(context)?.buscar}',
                             ),
                           ),
                         ),
@@ -91,11 +93,11 @@ class SearchView extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 10),
-                const Align(
+                Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'For you',
-                    style: TextStyle(
+                    '${AppLocalizations.of(context)?.paraTi}',
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
@@ -182,11 +184,11 @@ class SearchView extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                const Align(
+                Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    'Recently viewed',
-                    style: TextStyle(
+                    '${AppLocalizations.of(context)?.vistosRecientemente}',
+                    style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),

@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:job_match_app/config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:job_match_app/domain/models/user_model.dart';
 import 'package:job_match_app/infrastructure/provider/ai_recognition.dart';
 import 'package:job_match_app/infrastructure/provider/cv_recognizer.dart';
@@ -40,7 +41,7 @@ class _MethodsFillInformationState
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Text(
-                        'Select a method\nto fill your information',
+                        '${AppLocalizations.of(context)?.seleccionaUnMetodo}',
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -76,17 +77,17 @@ class _MethodsFillInformationState
                           fit: BoxFit.cover,
                         ),
                       ),
-                      child: const Align(
+                      child: Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                'Uploading CV',
-                                style: TextStyle(
+                                '${AppLocalizations.of(context)?.subiendoCV}',
+                                style: const TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -114,17 +115,17 @@ class _MethodsFillInformationState
                           fit: BoxFit.cover,
                         ),
                       ),
-                      child: const Align(
+                      child: Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8.0),
                           child: Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                'By AI recognition',
-                                style: TextStyle(
+                                '${AppLocalizations.of(context)?.porReconocimientoDeIA}',
+                                style: const TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
@@ -146,8 +147,8 @@ class _MethodsFillInformationState
                       ),
                       label: Text(
                         user == null
-                            ? 'Fill by typing'
-                            : 'Welcome ${user.personalInfo.names}',
+                            ? '${AppLocalizations.of(context)?.completarEscribiendo}'
+                            : '${AppLocalizations.of(context)?.bienvenido}/a ${user.personalInfo.names}',
                         style: TextStyle(
                           color: Theme.of(context).brightness == Brightness.dark
                               ? Colors.white

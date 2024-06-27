@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:job_match_app/config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:job_match_app/presentation/widgets/LoginWidgets/snackbar.dart';
 
 class ForgotPassword extends StatefulWidget {
@@ -22,9 +23,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           onTap: () {
             myDialogBox(context);
           },
-          child: const Text(
-            "Forgot Password?",
-            style: TextStyle(
+          child: Text(
+            "${AppLocalizations.of(context)?.olvidasteTuContrasena}",
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: Colors.blue,

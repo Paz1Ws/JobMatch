@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:job_match_app/domain/models/user_model.dart';
 
 class AIRecognizer {
   final Dio _dio = Dio();

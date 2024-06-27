@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:job_match_app/config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
 
 class LoaderFillInformation extends StatefulWidget {
@@ -10,41 +11,55 @@ class LoaderFillInformation extends StatefulWidget {
 
 class _LoaderFillInformationState extends State<LoaderFillInformation>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
+  AnimationController? _animationController;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 15), // Set the duration to 15 seconds
-    )..repeat();
+    // Esperar 2 segundos antes de iniciar la animación
+    Future.delayed(const Duration(seconds: 2), () {
+      _animationController = AnimationController(
+        vsync: this,
+        duration: const Duration(
+            seconds: 15), // Establecer la duración en 15 segundos
+      )..repeat();
+      setState(() {}); // Actualizar el estado para iniciar la animación
+    });
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white
-          .withOpacity(0.5), // Set the background color to semi-transparent
+      backgroundColor: Colors
+          .transparent, // Establecer el color de fondo como semi-transparente
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset(
-              'assets/video/UploadingCV.json',
-              controller: _animationController,
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset(
+            'assets/video/UploadingCV.json',
+            controller: _animationController,
+          ),
+          Text(
+            '${AppLocalizations.of(context)?.subiendoCV}',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black,
             ),
-            const SizedBox(height: 20),
-            const CircularProgressIndicator(),
-          ],
-        ),
-      ),
+          ),
+          const SizedBox(height: 20),
+          const CircularProgressIndicator(),
+        ],
+      )),
     );
   }
 }

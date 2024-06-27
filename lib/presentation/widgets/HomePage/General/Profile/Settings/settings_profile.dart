@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:job_match_app/config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:job_match_app/config/theme/theme.dart';
 import 'package:job_match_app/infrastructure/provider/screen_index_provider.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/Profile/Settings/edit_account_screen.dart';
@@ -36,17 +37,17 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Settings",
-                style: TextStyle(
+              Text(
+                '${AppLocalizations.of(context)?.ajustes}',
+                style: const TextStyle(
                   fontSize: 36,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                "Account",
-                style: TextStyle(
+              Text(
+                '${AppLocalizations.of(context)?.cuenta}',
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
                 ),
@@ -70,21 +71,21 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                     ),
                   ),
                   const SizedBox(width: 20),
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Job Match",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
-                        "The magic of job matching",
-                        style: TextStyle(
-                          fontSize: 14,
+                        '${AppLocalizations.of(context)?.laMagiaDelEmparejamientoLaboral}',
+                        style: const TextStyle(
+                          fontSize: 10,
                           color: Colors.grey,
                         ),
                       )
@@ -104,25 +105,25 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
                 ],
               ),
               const SizedBox(height: 40),
-              const Text(
-                "Preferences",
-                style: TextStyle(
+              Text(
+                '${AppLocalizations.of(context)?.preferencias}',
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "Language",
+                title: '${AppLocalizations.of(context)?.idioma}',
                 icon: Ionicons.language,
                 bgColor: Colors.orange.shade100,
                 iconColor: Colors.orange,
-                value: "English",
+                value: "Spanish",
                 onTap: () {},
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "Notifications",
+                title: '${AppLocalizations.of(context)?.notificaciones}',
                 icon: Ionicons.notifications,
                 bgColor: Colors.blue.shade100,
                 iconColor: Colors.blue,
@@ -130,7 +131,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               ),
               const SizedBox(height: 20),
               SettingSwitch(
-                title: "Dark Mode",
+                title: '${AppLocalizations.of(context)?.modoOscuro}',
                 icon: Theme.of(context).brightness == Brightness.dark
                     ? Ionicons.moon
                     : Ionicons.sunny,
@@ -148,7 +149,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "Privacy",
+                title: '${AppLocalizations.of(context)?.privacidad}',
                 icon: Ionicons.lock_closed,
                 bgColor: Colors.green.shade100,
                 iconColor: Colors.green,
@@ -156,7 +157,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "About",
+                title: '${AppLocalizations.of(context)?.acercaDe}',
                 icon: Ionicons.information_circle,
                 bgColor: Colors.purple.shade100,
                 iconColor: Colors.purple,
@@ -164,7 +165,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               ),
               const SizedBox(height: 20),
               SettingItem(
-                title: "Log Out",
+                title: '${AppLocalizations.of(context)?.cerrarSesion}',
                 icon: Ionicons.log_out,
                 bgColor: Colors.red.shade100,
                 iconColor: Colors.red,

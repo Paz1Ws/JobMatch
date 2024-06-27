@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:job_match_app/config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/Google/login_with_google.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/Login/ForEnterprises/enterprises_login.dart';
 import 'package:job_match_app/presentation/screens/RegisterScreens/SignUp/sign_up_screen.dart';
@@ -113,25 +114,29 @@ class _SignupScreenState extends State<LoginScreen> {
                       TextFieldInput(
                         icon: Icons.person,
                         textEditingController: emailController,
-                        hintText: 'Enter your email',
+                        hintText:
+                            '${AppLocalizations.of(context)?.ingresaTuCorreoElectronico}',
                         textInputType: TextInputType.text,
                       ),
                       TextFieldInput(
                         icon: Icons.lock,
                         textEditingController: passwordController,
-                        hintText: 'Enter your password',
+                        hintText:
+                            '${AppLocalizations.of(context)?.ingresaTuContrasena}',
                         textInputType: TextInputType.text,
                         isPass: true,
                       ),
                       const ForgotPassword(),
                       MyButtons(
-                          onTap: loginUser, text: "Log In", disabled: false),
+                          onTap: loginUser,
+                          text: '${AppLocalizations.of(context)?.inicio}',
+                          disabled: false),
                       Row(
                         children: [
                           Expanded(
                             child: Container(height: 1, color: Colors.black26),
                           ),
-                          const Text("  or  "),
+                          const Text("  o  "),
                           Expanded(
                             child: Container(height: 1, color: Colors.black26),
                           ),
@@ -159,7 +164,7 @@ class _SignupScreenState extends State<LoginScreen> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              "Continue with Google",
+                              '${AppLocalizations.of(context)?.continuarConGoogle}',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
@@ -176,7 +181,9 @@ class _SignupScreenState extends State<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don't have an account? "),
+                          Text(
+                            '${AppLocalizations.of(context)?.noTienesUnaCuenta}',
+                          ),
                           GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(
@@ -186,7 +193,7 @@ class _SignupScreenState extends State<LoginScreen> {
                               );
                             },
                             child: const Text(
-                              "SignUp",
+                              'Registrarte',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -208,9 +215,9 @@ class _SignupScreenState extends State<LoginScreen> {
                             ),
                           );
                         },
-                        child: const Text(
-                          "For Companies",
-                          style: TextStyle(
+                        child: Text(
+                          '${AppLocalizations.of(context)?.paraEmpresas}',
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, color: Colors.black),
                         ),
                       ),

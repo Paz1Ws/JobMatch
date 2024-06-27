@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:job_match_app/config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:job_match_app/infrastructure/provider/screen_index_provider.dart';
 
 // ignore: must_be_immutable
@@ -42,7 +43,7 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
                 ref.read(counterProvider.notifier).update((state) => 0);
               },
               icon: Icons.home,
-              text: 'Home',
+              text: '${AppLocalizations.of(context)?.inicio}',
               iconColor: textColor,
               textColor: textColor,
               iconSize: 24,
@@ -55,7 +56,7 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
                 ref.read(counterProvider.notifier).update((state) => 1);
               },
               icon: Icons.search,
-              text: 'Search',
+              text: '${AppLocalizations.of(context)?.buscar}',
               iconColor: textColor,
               textColor: textColor,
               iconSize: 24,
@@ -71,7 +72,9 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
               },
               icon:
                   widget.isEnterprise ? Icons.work : FontAwesomeIcons.briefcase,
-              text: widget.isEnterprise ? 'Add Job' : 'Jobs',
+              text: widget.isEnterprise
+                  ? 'Add Job'
+                  : '${AppLocalizations.of(context)?.trabajos}',
               iconColor: textColor,
               textColor: textColor,
               iconSize: 22,
@@ -86,7 +89,7 @@ class _BottomNavigatorState extends ConsumerState<BottomNavigator> {
                 ref.read(counterProvider.notifier).update((state) => 3);
               },
               icon: Icons.person,
-              text: 'Profile',
+              text: '${AppLocalizations.of(context)?.perfil}',
               iconColor: textColor,
               textColor: textColor,
               iconSize: 24,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:job_match_app/config/Languajes/flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:job_match_app/presentation/widgets/HomePage/General/theme_button.dart';
 
 class AppliedJobs extends StatelessWidget {
@@ -49,9 +50,9 @@ class AppliedJobs extends StatelessWidget {
     ];
     return Column(
       children: [
-        const Text(
-          'My Jobs',
-          style: TextStyle(
+        Text(
+          '${AppLocalizations.of(context)?.misTrabajos}',
+          style: const TextStyle(
             color: Colors.orange,
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
