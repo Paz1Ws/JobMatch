@@ -177,11 +177,11 @@ class _AITextChatState extends State<AITextChat> {
                   IconButton(
                     icon: const Icon(Icons.image),
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const AIImageChat(),
-                        ),
-                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(
+                      //     // builder: (context) => const AIImageChat(),
+                      //   ),
+                      // );
                     },
                   ),
                   Expanded(

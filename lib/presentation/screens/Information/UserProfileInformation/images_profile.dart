@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
 import 'package:job_match_app/presentation/widgets/ProfileInformation/PhotoZone/image_container.dart';
 
@@ -129,7 +128,7 @@ class _PhotoSectionState extends ConsumerState<PhotoSection> {
             ),
           ),
           Visibility(
-            visible: ref.watch(change_page_valid).changepageValid,
+            visible: true,
             child: Padding(
               padding: EdgeInsets.only(
                   left: 200, top: MediaQuery.sizeOf(context).height / 1.11),
@@ -167,7 +166,7 @@ class _PhotoSectionState extends ConsumerState<PhotoSection> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        _pickImageFromGallery();
+                        // _pickImageFromGallery();
                       },
                       child: const SizedBox(
                         child: Column(
@@ -185,7 +184,7 @@ class _PhotoSectionState extends ConsumerState<PhotoSection> {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        _pickImageFromCamera();
+                        // _pickImageFromCamera();
                       },
                       child: const SizedBox(
                         child: Column(
@@ -208,26 +207,26 @@ class _PhotoSectionState extends ConsumerState<PhotoSection> {
       },
     );
   }
-
-  Future _pickImageFromGallery() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      _image = File(returnImage.path).readAsBytesSync();
-    });
-    Navigator.of(context).pop(); //close the model sheet
-  }
-
-  Future _pickImageFromCamera() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      _image = File(returnImage.path).readAsBytesSync();
-    });
-    Navigator.of(context).pop();
-  }
 }
+//   Future _pickImageFromGallery() async {
+//     final returnImage =
+//         await ImagePicker().pickImage(source: ImageSource.gallery);
+//     if (returnImage == null) return;
+//     setState(() {
+//       selectedImage = File(returnImage.path);
+//       _image = File(returnImage.path).readAsBytesSync();
+//     });
+//     Navigator.of(context).pop(); //close the model sheet
+//   }
+
+//   Future _pickImageFromCamera() async {
+//     final returnImage =
+//         await ImagePicker().pickImage(source: ImageSource.camera);
+//     if (returnImage == null) return;
+//     setState(() {
+//       selectedImage = File(returnImage.path);
+//       _image = File(returnImage.path).readAsBytesSync();
+//     });
+//     Navigator.of(context).pop();
+//   }
+// }

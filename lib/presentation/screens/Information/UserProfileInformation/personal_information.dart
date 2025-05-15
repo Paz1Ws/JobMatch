@@ -154,7 +154,7 @@ class SignUpForm extends ConsumerWidget {
                     ),
                   ),
                   Visibility(
-                    visible: ref.watch(change_page_valid).changepageValid,
+                    visible: true,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 220),
                       child: Text(

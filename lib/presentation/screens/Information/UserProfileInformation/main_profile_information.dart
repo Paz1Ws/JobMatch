@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:job_match_app/infrastructure/provider/cv_recognizer.dart';
 import 'package:job_match_app/infrastructure/provider/profile_information_prov.dart';
 import 'package:job_match_app/presentation/screens/Information/UserProfileInformation/method_fill_information.dart';
 
@@ -63,9 +62,7 @@ class ProfilePageIndicator extends ConsumerWidget {
               ),
             ),
             PageView(
-              physics: ref.watch(change_page_valid).changepageValid
-                  ? const AlwaysScrollableScrollPhysics()
-                  : const NeverScrollableScrollPhysics(),
+              physics: AlwaysScrollableScrollPhysics(),
               controller: pageController,
               onPageChanged: (index) {
                 ref.read(change_page).changePageMethod(index);

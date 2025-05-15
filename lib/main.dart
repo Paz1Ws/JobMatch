@@ -12,34 +12,33 @@ import 'package:job_match_app/infrastructure/services/Notifications/firebase_api
 import 'package:job_match_app/infrastructure/services/firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:job_match_app/config/Languajes/l10n/l10n.dart'; // Import the necessary package
+import 'package:job_match_app/config/Languajes/l10n/l10n.dart';
 
 Future<void> main() async {
-  // Initialize Firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseMessaging.instance.setAutoInitEnabled(true);
-  await FirebaseApi().initNotification();
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    // Procesa el mensaje recibido
-    print('Recibido: ${message.notification?.title}');
-    print('Cuerpo: ${message.notification?.body}');
+  // await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  // await FirebaseApi().initNotification();
+  // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //   // Procesa el mensaje recibido
+  //   print('Recibido: ${message.notification?.title}');
+  //   print('Cuerpo: ${message.notification?.body}');
 
-    // Si la aplicación está en primer plano, muestra la notificación
-    if (Platform.isAndroid) {
-      FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-          FlutterLocalNotificationsPlugin();
-      var notificationDetails = const NotificationDetails(
-          android: AndroidNotificationDetails('channel_id', 'channel_name',
-              importance: Importance.high,
-              priority: Priority.high,
-              icon: 'app_icon'));
-      flutterLocalNotificationsPlugin.show(0, message.notification?.title,
-          message.notification?.body, notificationDetails);
-    }
-  });
+  //   // Si la aplicación está en primer plano, muestra la notificación
+  //   if (Platform.isAndroid) {
+  //     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  //         FlutterLocalNotificationsPlugin();
+  //     var notificationDetails = const NotificationDetails(
+  //         android: AndroidNotificationDetails('channel_id', 'channel_name',
+  //             importance: Importance.high,
+  //             priority: Priority.high,
+  //             icon: 'app_icon'));
+  //     flutterLocalNotificationsPlugin.show(0, message.notification?.title,
+  //         message.notification?.body, notificationDetails);
+  //   }
+  // });
   runApp(
     const ProviderScope(
       child: MainApp(),

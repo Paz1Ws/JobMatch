@@ -1,0 +1,2 @@
+C:/Users/ChristopherPaz/Desktop/dev/JobMatch/android/app/.cxx/Debug/f1p422b1/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/ChristopherPaz/Desktop/dev/JobMatch/android/app/.cxx/Debug/f1p422b1/armeabi-v7a/CMakeFiles/rebuild_cache.dir

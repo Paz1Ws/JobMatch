@@ -149,7 +149,7 @@ class _SignupScreenState extends State<LoginScreen> {
                               const Color.fromARGB(255, 247, 175, 67),
                         ),
                         onPressed: () async {
-                          await FirebaseServices().signInWithGoogle();
+                          // await FirebaseServices().signInWithGoogle();
                           context.go('/user_home');
                         },
                         child: Row(

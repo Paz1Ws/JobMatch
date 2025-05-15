@@ -2,10 +2,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 
-final pickImageFromGallery = Provider((ref) => _pickImageFromGallery);
-final pickImageFromCamera = Provider((ref) => _pickImageFromCamera);
+// final pickImageFromGallery = Provider((ref) => _pickImageFromGallery);
+// final pickImageFromCamera = Provider((ref) => _pickImageFromCamera);
 final imageProvider = StateProvider((ref) => null);
 final showImagePickerOptionProvider = Provider((ref) {
   return (BuildContext context,
@@ -24,14 +24,14 @@ final showImagePickerOptionProvider = Provider((ref) {
                 Expanded(
                   child: InkWell(
                     onTap: () async {
-                      final imageData = await _pickImageFromGallery();
-                      if (imageData != null) {
-                        final imageData = await _pickImageFromGallery();
-                        if (imageData != null) {
-                          updateImage(imageData);
-                          Navigator.of(context).pop();
-                        }
-                      }
+                      // final imageData = await _pickImageFromGallery();
+                      // if (imageData != null) {
+                      //   final imageData = await _pickImageFromGallery();
+                      //   if (imageData != null) {
+                      //     updateImage(imageData);
+                      //     Navigator.of(context).pop();
+                      //   }
+                      // }
                     },
                     child: const SizedBox(
                       child: Column(
@@ -49,13 +49,13 @@ final showImagePickerOptionProvider = Provider((ref) {
                 Expanded(
                   child: InkWell(
                     onTap: () async {
-                      // final image = await _pickImageFromCamera();
-                      _pickImageFromCamera();
-                      final imageData = await _pickImageFromCamera();
-                      if (imageData != null) {
-                        updateImage(imageData);
-                        Navigator.of(context).pop();
-                      }
+                      // // final image = await _pickImageFromCamera();
+                      // _pickImageFromCamera();
+                      // final imageData = await _pickImageFromCamera();
+                      // if (imageData != null) {
+                      //   updateImage(imageData);
+                      //   Navigator.of(context).pop();
+                      // }
                     },
                     child: const SizedBox(
                       child: Column(
@@ -78,22 +78,22 @@ final showImagePickerOptionProvider = Provider((ref) {
     );
   };
 });
-Future<Uint8List?> _pickImageFromGallery() async {
-  final picker = ImagePicker();
-  final pickedImage = await picker.pickImage(source: ImageSource.gallery);
-  if (pickedImage != null) {
-    return pickedImage.readAsBytes();
-  } else {
-    return null;
-  }
-}
+// Future<Uint8List?> _pickImageFromGallery() async {
+//   final picker = ImagePicker();
+//   final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+//   if (pickedImage != null) {
+//     return pickedImage.readAsBytes();
+//   } else {
+//     return null;
+//   }
+// }
 
-Future<Uint8List?> _pickImageFromCamera() async {
-  final picker = ImagePicker();
-  final pickedImage = await picker.pickImage(source: ImageSource.camera);
-  if (pickedImage != null) {
-    return pickedImage.readAsBytes();
-  } else {
-    return null;
-  }
-}
+// Future<Uint8List?> _pickImageFromCamera() async {
+//   final picker = ImagePicker();
+//   final pickedImage = await picker.pickImage(source: ImageSource.camera);
+//   if (pickedImage != null) {
+//     return pickedImage.readAsBytes();
+//   } else {
+//     return null;
+//   }
+// }
